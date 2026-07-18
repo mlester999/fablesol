@@ -4,7 +4,15 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { searchDocumentation } from '@/content/docs/search';
 
-export function DocsSearch() {
+interface DocsSearchProps {
+  /**
+   * header — compact button for the site header (default).
+   * hero — large search-bar-shaped trigger for the docs homepage.
+   */
+  readonly variant?: 'header' | 'hero';
+}
+
+export function DocsSearch({ variant = 'header' }: DocsSearchProps) {
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,10 +55,21 @@ export function DocsSearch() {
 
   return (
     <>
-      <button type="button" className="btn btn-ghost" onClick={() => setOpen(true)}>
-        Search
-        <kbd style={{ opacity: 0.7, fontSize: '0.78rem' }}>⌘K</kbd>
-      </button>
+      {variant === 'hero' ? (
+        <button type="button" className="dhome-search-btn" onClick={() => setOpen(true)}>
+          <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" focusable="false">
+            <circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" strokeWidth="2" />
+            <path d="m13 13 4.5 4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          Search the player guide…
+          <kbd>⌘K</kbd>
+        </button>
+      ) : (
+        <button type="button" className="btn btn-ghost" onClick={() => setOpen(true)}>
+          Search
+          <kbd style={{ opacity: 0.7, fontSize: '0.78rem' }}>⌘K</kbd>
+        </button>
+      )}
       <dialog
         ref={dialogRef}
         className="search-dialog"

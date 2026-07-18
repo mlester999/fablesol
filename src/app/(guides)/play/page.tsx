@@ -21,8 +21,8 @@ export default function PlayPage() {
         </p>
         <h1>The world is being built</h1>
         <p>
-          {PROJECT_STATUS.detail} There is no playable build to enter yet — and we will never
-          pretend otherwise.
+          {PROJECT_STATUS.detail} There is no playable build to enter yet, and we will never pretend
+          otherwise.
         </p>
         <p>
           <strong>{GAME_PHILOSOPHY}</strong> While the farm takes shape, you can learn every
@@ -45,7 +45,7 @@ export default function PlayPage() {
           Get ready for opening day
         </h2>
         <ul className="docs-list" style={{ margin: 0 }}>
-          <li>Read the access guide — entry requires holding at least 10,000 $FABLE on Solana</li>
+          <li>Read the access guide: entry requires holding at least 10,000 $FABLE on Solana</li>
           <li>Learn the two currencies: off-chain COPPER and on-chain $FABLE</li>
           <li>Meet the five farm animals and the seven material rarities</li>
           <li>Preview Cat Dice, Cat Battle, and tournament rules</li>

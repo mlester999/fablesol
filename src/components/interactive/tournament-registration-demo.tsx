@@ -52,20 +52,50 @@ export function TournamentRegistrationDemo() {
       >
         <div className="search-dialog__body">
           <h3 id={titleId}>Confirm tournament entry</h3>
-          <ul className="docs-list">
-            <li>Tournament name: Meadow Cup (example)</li>
-            <li>Tier: Levels 11–20 (example)</li>
-            <li>Start: 2026-08-12 19:00 UTC</li>
-            <li>Expected duration: about 90 minutes</li>
-            <li>Registration deadline: 2026-08-12 18:30 UTC</li>
-            <li>Entrance fee: {fee} COPPER</li>
-            <li>Current regular COPPER: {balance} (example)</li>
-            <li>Remaining after payment: {remaining} COPPER (example)</li>
-            <li>Sponsored $FABLE prize: not configured in this example</li>
-            <li>Refunds: fewer than 2 players, cancellation, or qualifying system failure</li>
-          </ul>
+          <dl className="ticket">
+            <div className="ticket__row">
+              <dt>Tournament</dt>
+              <dd>Meadow Cup (example)</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Tier</dt>
+              <dd>Levels 11–20 (example)</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Start</dt>
+              <dd>2026-08-12 19:00 UTC</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Expected duration</dt>
+              <dd>About 90 minutes</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Registration deadline</dt>
+              <dd>2026-08-12 18:30 UTC</dd>
+            </div>
+            <div className="ticket__row" data-emphasis="true">
+              <dt>Entrance fee</dt>
+              <dd>{fee} COPPER</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Current regular COPPER</dt>
+              <dd>{balance} (example)</dd>
+            </div>
+            <div className="ticket__row" data-emphasis="true">
+              <dt>Remaining after payment</dt>
+              <dd>{remaining} COPPER (example)</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Sponsored $FABLE prize</dt>
+              <dd>Not configured in this example</dd>
+            </div>
+            <div className="ticket__row">
+              <dt>Refunds</dt>
+              <dd>Fewer than 2 players, cancellation, or qualifying system failure</dd>
+            </div>
+          </dl>
           <p>
-            <strong>No real COPPER will be charged.</strong>
+            <strong>No real COPPER will be charged, and no real registration occurs.</strong>
           </p>
           <div className="cta-row">
             <button

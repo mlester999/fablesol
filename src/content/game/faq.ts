@@ -151,7 +151,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     id: 'equipment-gacha',
     question: 'Is there equipment gacha?',
     answer:
-      'No. Equipment is presented as acquire-or-craft progression through bosses, tournaments, chests, crafting, and player trading — not paid loot boxes or gacha equipment.',
+      'No. Equipment is presented as acquire-or-craft progression through bosses, tournaments, chests, crafting, and player trading, not paid loot boxes or gacha equipment.',
     relatedRoutes: ['/docs/cat-battle/equipment'],
   },
   {
@@ -227,5 +227,103 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     answer:
       'No. Digital asset values can change. Gameplay and token ownership are not presented as guaranteed financial opportunities.',
     relatedRoutes: ['/docs/fable', '/docs/security'],
+  },
+  {
+    id: 'farm-visits-possible',
+    question: 'Can other players visit my farm?',
+    answer:
+      'Yes. Personal farm visits are an approved Planned feature. You will choose a visibility setting: Public, Friends Only, Invite Only, or Private. Farm visits are not available in the current game build.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visits-realtime',
+    question: 'Will I see visitors in real time?',
+    answer:
+      'Yes. When farm visits ship (Planned), owners see visitors arrive live, and everyone in the farm sees movement, emotes, sitting, petting, and helper actions as they happen.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visits-see-each-other',
+    question: 'Can visitors see one another?',
+    answer:
+      'Yes. Everyone in the same farm instance will see all other players there, the owner and every visitor, including positions, walking direction, and animations.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visits-capacity',
+    question: 'How many visitors can enter at once?',
+    answer:
+      'Up to 10 visitors at the same time. The owner does not count as a visitor, so one farm instance holds at most 11 players. Daily sightseeing visits are unlimited.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visits-collect-materials',
+    question: 'Can visitors collect my animals’ materials?',
+    answer:
+      'No, never. Visitors cannot collect Milk, Meat, Leather, Eggs, or Goat Wool, and cannot claim any production. Only the owner can collect from or economically benefit from the farm.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/animals'],
+  },
+  {
+    id: 'farm-visits-harvest-crops',
+    question: 'Can visitors harvest my crops?',
+    answer:
+      'No. Visitors can never harvest crops for themselves or claim production. With Allow Helpers enabled, a visitor may at most water one approved crop as a validated care action.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/farming'],
+  },
+  {
+    id: 'farm-visits-barn',
+    question: 'Can visitors enter my barn?',
+    answer:
+      'Visitors may enjoy the public showcase area: showcase animals, trophies, achievements, guest seating, and photo areas. Private owner areas such as storage, management, and unclaimed resources stay closed in every mode.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/housing'],
+  },
+  {
+    id: 'farm-visits-help',
+    question: 'Can visitors help with farm tasks?',
+    answer:
+      'Only if the owner selects Allow Helpers. Helpers may perform small approved actions such as watering one crop or brushing one animal, within daily Community Care limits.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'community-care-farm-cap',
+    question: 'How many Community Care contributions can my farm receive?',
+    answer:
+      'A farm can receive at most 5 valid Community Care contributions per UTC day, and each must come from a different player. Social visits remain welcome after 5/5.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'community-care-repeat',
+    question: 'Can one player repeatedly help the same farm?',
+    answer:
+      'One player can contribute valid care to the same farm only once per UTC day, and can validly help at most 5 different farms per UTC day. Repeat visits are welcome but add no extra care.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'community-care-divine',
+    question: 'Can helping increase Divine material chances?',
+    answer:
+      'No. Community Care never improves material rarity or the 1% Divine chance. It only adds a small provisional Animal Care progress benefit, at most 5% per farm per UTC day.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/animal-progression'],
+  },
+  {
+    id: 'community-care-copper',
+    question: 'Can helping generate COPPER?',
+    answer:
+      'No. Community Care provides a small social assistance benefit, but it does not create currency, valuable materials, or rare production.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/copper'],
+  },
+  {
+    id: 'farm-visits-offline',
+    question: 'Can players visit while the owner is offline?',
+    answer:
+      'That is the intended direction: a farm may remain visitable offline when its visibility permits, limited to public areas and permitted social interactions. Offline helper details are subject to future implementation and balancing.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visits-private',
+    question: 'Can I make my farm private?',
+    answer:
+      'Yes. The Private visibility setting means only you may enter unless a future explicit exception is approved. Friends Only and Invite Only offer middle grounds.',
+    relatedRoutes: ['/docs/farm-visits'],
   },
 ] as const;

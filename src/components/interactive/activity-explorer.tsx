@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import { ACTIVITIES, DAY_CHOICES } from '@/content/game/activities';
-import { AvailabilityBadge } from '@/components/site/availability-badge';
 
 type ChoiceId = (typeof DAY_CHOICES)[number]['id'];
 
@@ -41,11 +40,16 @@ export function ActivityExplorer() {
         <ul className="docs-list">
           {activities.map((activity) => (
             <li key={activity.id}>
-              <strong>{activity.name}:</strong> {activity.summary}{' '}
-              <AvailabilityBadge feature={activity.featureId} />
+              <strong>{activity.name}:</strong> {activity.summary}
             </li>
           ))}
         </ul>
+        <p>
+          <small>
+            These gameplay activities are planned for the playable world and are not available in
+            the current game build.
+          </small>
+        </p>
       </div>
     </div>
   );

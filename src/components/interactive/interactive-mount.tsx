@@ -100,6 +100,9 @@ const INTERACTIVE_COMPONENTS: Record<InteractiveName, ComponentType> = {
   'prize-pool-demo': lazyInteractive(() =>
     import('./prize-pool-demo').then((m) => ({ default: m.PrizePoolDemo })),
   ),
+  'farm-visit-explorer': lazyInteractive(() =>
+    import('./farm-visit-explorer').then((m) => ({ default: m.FarmVisitExplorer })),
+  ),
 };
 
 export function InteractiveMount({ component }: { readonly component: InteractiveName }) {

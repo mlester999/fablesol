@@ -50,7 +50,7 @@ export function ConnectButton() {
             {ACCESS.minimumHoldings.toLocaleString('en-US')} {ACCESS.tokenSymbol}.
           </p>
           <ul className="docs-list">
-            <li>No wallet is connected right now — this preview never simulates one.</li>
+            <li>No wallet is connected right now; this preview never simulates one.</li>
             <li>
               {ACCESS.tokenSymbol} is on-chain; {ACCESS.copperName} is the separate off-chain
               in-game currency.

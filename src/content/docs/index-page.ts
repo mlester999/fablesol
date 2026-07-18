@@ -1,5 +1,5 @@
 import { GAME_NAME, GAME_PHILOSOPHY } from '@/content/game/brand';
-import { definePage, links, list, section, callout } from './helpers';
+import { definePage, links, section, callout } from './helpers';
 import { DOCUMENTATION_PAGES, DOCUMENTATION_SECTIONS } from './pages';
 
 const sectionLinks = DOCUMENTATION_SECTIONS.map((sectionName) => {
@@ -58,14 +58,9 @@ export const docsIndexPage = definePage({
       'categories',
       'Browse by category',
       [
-        'Every route below contains real player-facing rules. Closely related topics share patterns, but no page is an empty shell.',
+        'Every category below contains real player-facing rules. Closely related topics share patterns, but no page is an empty shell.',
       ],
-      [
-        links(sectionLinks),
-        list(
-          DOCUMENTATION_PAGES.map((page) => `${page.section} · ${page.title}: ${page.description}`),
-        ),
-      ],
+      [links(sectionLinks)],
     ),
     section(
       'accuracy',

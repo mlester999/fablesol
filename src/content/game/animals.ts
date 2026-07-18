@@ -50,7 +50,7 @@ export const ANIMALS = [
     materialPlural: 'Milk',
     emoji: '🐄',
     summary: 'Produces Milk that grows rarer as the cow levels up.',
-    personality: 'Steady and reliable — a cornerstone of every cozy farm.',
+    personality: 'Steady and reliable, a cornerstone of every cozy farm.',
   },
   {
     id: 'pig',
@@ -85,7 +85,7 @@ export const ANIMALS = [
     material: 'Goat Wool',
     materialPlural: 'Goat Wool',
     emoji: '🐐',
-    summary: 'Produces Goat Wool — not goat milk, since Cow already supplies Milk.',
+    summary: 'Produces Goat Wool (not goat milk, since Cow already supplies Milk).',
     personality: 'Independent climbers with a soft-side talent for wool.',
   },
 ] as const;

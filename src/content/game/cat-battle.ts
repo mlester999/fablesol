@@ -42,7 +42,7 @@ export const CAT_BATTLE = {
   speedDeterminesFirst: true,
   mobileFriendly: true,
   philosophy:
-    'Easy to learn, hard to master — strategic without esports-level mechanical complexity.',
+    'Easy to learn, hard to master: strategic without esports-level mechanical complexity.',
 } as const;
 
 export const BATTLE_STATS = [

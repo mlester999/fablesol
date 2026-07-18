@@ -21,6 +21,7 @@ import {
   TOURNAMENT_STATUSES,
   TOURNAMENT_TYPES,
 } from '@/content/game';
+import * as FARM_VISITS from '@/content/game/farm-visits';
 
 /**
  * Public player-facing content must never expose the internal technology
@@ -71,6 +72,7 @@ const PUBLIC_CONTENT: Record<string, unknown> = {
   availabilityStatuses: AVAILABILITY_STATUSES,
   featureAvailability: FEATURE_AVAILABILITY,
   projectStatus: PROJECT_STATUS,
+  farmVisits: FARM_VISITS,
   brand: { GAME_NAME, GAME_TAGLINE, GAME_DESCRIPTION },
 };
 

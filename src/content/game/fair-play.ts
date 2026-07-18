@@ -60,7 +60,7 @@ export const SECURITY = {
     },
   ],
   never: [
-    'Never share your seed phrase or private keys with anyone — Fablesol will never ask for them.',
+    'Never share your seed phrase or private keys with anyone. Fablesol will never ask for them.',
     'Never approve a wallet request you do not understand.',
     'Never trust game links or “support staff” outside the official Discord and X channels.',
   ],

@@ -6,6 +6,7 @@ export * from './brand';
 export * from './cat-battle';
 export * from './economy';
 export * from './fair-play';
+export * from './farm-visits';
 export * from './faq';
 export * from './glossary';
 export * from './tournaments';

@@ -139,7 +139,7 @@ export const DAY_CHOICES = [
   {
     id: 'tournament',
     title: 'Enter a tournament',
-    description: 'Optional competitive path — never required to enjoy the cozy core.',
+    description: 'Optional competitive path, never required to enjoy the cozy core.',
     activities: ['cat-activities'],
   },
 ] as const;

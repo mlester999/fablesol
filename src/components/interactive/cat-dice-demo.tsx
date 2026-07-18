@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from '@/lib/use-prefers-reduced-motion';
 export function CatDiceDemo() {
   const reduced = usePrefersReducedMotion();
   const [faces, setFaces] = useState<[number, number]>([3, 4]);
-  const [message, setMessage] = useState('Illustration only — not a real roll.');
+  const [message, setMessage] = useState('Illustration only, not a real roll.');
 
   function roll() {
     const next: [number, number] = [

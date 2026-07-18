@@ -76,7 +76,8 @@ export interface DocInteractive {
     | 'market-comparison'
     | 'class-soft-counters'
     | 'battle-flow'
-    | 'prize-pool-demo';
+    | 'prize-pool-demo'
+    | 'farm-visit-explorer';
 }
 
 export type DocumentationBlock =

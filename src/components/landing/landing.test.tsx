@@ -1,8 +1,13 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { LandingNav } from './landing-nav';
 import { WorldSceneFallback } from './world-scene-fallback';
 import PlayPage from '@/app/(guides)/play/page';
+
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/',
+  useRouter: () => ({ push: vi.fn() }),
+}));
 
 afterEach(cleanup);
 

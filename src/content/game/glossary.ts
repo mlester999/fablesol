@@ -24,7 +24,7 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     id: 'off-chain',
     term: 'Off-chain',
     definition:
-      'Systems that run inside the game service rather than as blockchain token transfers — for example COPPER balances and most cozy gameplay.',
+      'Systems that run inside the game service rather than as blockchain token transfers, for example COPPER balances and most cozy gameplay.',
     relatedRoutes: ['/docs/economy'],
   },
   {
@@ -139,7 +139,7 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
   {
     id: 'hp',
     term: 'HP',
-    definition: 'Hit points — how much damage a cat can withstand in Cat Battle.',
+    definition: 'Hit points: how much damage a cat can withstand in Cat Battle.',
     relatedRoutes: ['/docs/cat-battle/stats'],
   },
   {
@@ -263,7 +263,7 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     id: 'utc',
     term: 'UTC',
     definition:
-      'Coordinated Universal Time — the canonical timezone for all official game schedules and timestamps.',
+      'Coordinated Universal Time, the canonical timezone for all official game schedules and timestamps.',
     relatedRoutes: ['/docs/utc'],
   },
   {
@@ -283,7 +283,7 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     id: 'game-validated',
     term: 'Game-validated outcome',
     definition:
-      'Critical outcomes — especially Cat Battle resolution — are validated by the game for fairness and consistency.',
+      'Critical outcomes, especially Cat Battle resolution, are validated by the game for fairness and consistency.',
     relatedRoutes: ['/docs/cat-battle', '/docs/security'],
   },
   {
@@ -292,5 +292,117 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     definition:
       'Given the same battle inputs, Cat Battle resolution produces consistent outcomes under the approved battle rules.',
     relatedRoutes: ['/docs/cat-battle'],
+  },
+  {
+    id: 'personal-farm',
+    term: 'Personal Farm',
+    definition:
+      'A player’s own farm: their private production and management space, and a social showroom that other players can visit when visibility allows. Planned feature.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visit',
+    term: 'Farm Visit',
+    definition:
+      'A live multiplayer stay on another player’s personal farm, with realtime presence for the owner and up to 10 visitors. Planned feature.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-visibility',
+    term: 'Farm Visibility',
+    definition:
+      'The owner-selected setting for who may enter a farm: Public, Friends Only, Invite Only, or Private.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'view-only',
+    term: 'View Only',
+    definition:
+      'The most restrictive visitor interaction mode: visitors may walk public areas and admire animals, trophies, and showcases, but cannot interact with farm production.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'social-interactions-mode',
+    term: 'Social Interactions',
+    definition:
+      'A visitor interaction mode adding petting, emotes, guest seating, guestbook messages, Farm Appreciation, and approved social props on top of View Only.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'allow-helpers',
+    term: 'Allow Helpers',
+    definition:
+      'The most open visitor interaction mode: Social Interactions plus limited owner-approved helper actions, such as watering one crop or brushing one animal.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'showcase-animal',
+    term: 'Showcase Animal',
+    definition:
+      'An animal a player proudly features (up to three on the profile and up to three near the farm entrance or showcase pen) with public information visitors may inspect.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/animals'],
+  },
+  {
+    id: 'showcase-pen',
+    term: 'Showcase Pen',
+    definition:
+      'The featured area near the farm entrance where up to three showcase animals greet visitors.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'community-care',
+    term: 'Community Care',
+    definition:
+      'The daily social-help system: up to 5 valid contributions per farm per UTC day, each from a different player, worth a provisional 1% Animal Care progress each. It never creates currency, valuable materials, or rare production.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'care-contribution',
+    term: 'Care Contribution',
+    definition:
+      'One validated helper action counted toward a farm’s daily Community Care, at most one per visitor per farm per UTC day.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-appreciation',
+    term: 'Farm Appreciation',
+    definition:
+      'A social reaction a visitor can leave once per farm per UTC day. It carries no COPPER, material, or tradeable reward.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'guestbook',
+    term: 'Guestbook',
+    definition:
+      'A place for visitors to leave one message per farm every 24 hours, with future moderation and spam protections.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'farm-instance',
+    term: 'Farm Instance',
+    definition:
+      'One live shared copy of a personal farm holding at most 11 players: the owner plus 10 visitors.',
+    relatedRoutes: ['/docs/farm-visits'],
+  },
+  {
+    id: 'temperament',
+    term: 'Temperament',
+    definition:
+      'A farm animal’s social identity, for example Gentle or Playful (examples, not final). It shapes idle behavior and reactions, never material rarity, Divine chance, or COPPER. The permanent cat keeps its separate Personality.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/animals'],
+  },
+  {
+    id: 'public-barn-area',
+    term: 'Public Barn Area',
+    definition:
+      'The showcase part of a barn open to visitors: showcase animals, trophies, achievements, decorative displays, guest seating, and photo areas.',
+    relatedRoutes: ['/docs/farm-visits', '/docs/housing'],
+  },
+  {
+    id: 'private-management-area',
+    term: 'Private Management Area',
+    definition:
+      'The owner-only part of a farm or barn: storage, production and animal management, settings, private inventory, and unclaimed resources. Closed to visitors in every mode.',
+    relatedRoutes: ['/docs/farm-visits'],
   },
 ] as const;

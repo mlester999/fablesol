@@ -35,11 +35,20 @@ export function EnergySimulator() {
         Start {ENERGY.starting}, max {ENERGY.maximum}, gain {ENERGY.gainAfterAction} after each
         action.
       </p>
-      <div className="stat-grid">
-        <div className="stat-pill">
-          <span>Current Energy</span>
-          <strong>{energy}</strong>
-        </div>
+      <div className="energy-meter" role="img" aria-label={`Energy ${energy} of ${ENERGY.maximum}`}>
+        <span
+          className="energy-meter__fill"
+          style={{ width: `${(energy / ENERGY.maximum) * 100}%` }}
+          aria-hidden="true"
+        />
+        <span
+          className="energy-meter__start"
+          style={{ left: `${(ENERGY.starting / ENERGY.maximum) * 100}%` }}
+          aria-hidden="true"
+        />
+        <strong className="energy-meter__value" aria-hidden="true">
+          {energy} / {ENERGY.maximum}
+        </strong>
       </div>
       <div className="chip-row">
         {ACTIONS.map((action) => (

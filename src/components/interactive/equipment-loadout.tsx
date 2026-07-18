@@ -29,7 +29,7 @@ export function EquipmentLoadout() {
       <span className="interactive-card__label">Educational loadout preview</span>
       <h3>Three equipment slots</h3>
       <p>
-        Exactly Weapon, Armor, and Accessory. Example names are labels only — not finalized loot
+        Exactly Weapon, Armor, and Accessory. Example names are labels only, not finalized loot
         tables.
       </p>
       <div className="htp-grid">

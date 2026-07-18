@@ -33,6 +33,35 @@ export function MatchmakingTimeline() {
         Same level tier, similar Battle Power. Wagered matches never exceed ±
         {MATCHMAKING.wageredMaxRangePercent}%.
       </p>
+      <div
+        className="mm-timeline"
+        role="img"
+        aria-label={`Search timeline: plus or minus 5 percent from 0 seconds, 8 percent from 20 seconds, 10 percent from 40 seconds. Currently at ${seconds} seconds, plus or minus ${range} percent.`}
+      >
+        <div className="mm-timeline__bar" aria-hidden="true">
+          <span className="mm-timeline__band" data-active={range === 5}>
+            <em>0–20s</em>
+            <strong>±5%</strong>
+          </span>
+          <span className="mm-timeline__band" data-active={range === 8}>
+            <em>20–40s</em>
+            <strong>±8%</strong>
+          </span>
+          <span className="mm-timeline__band" data-active={range === 10}>
+            <em>40s+</em>
+            <strong>±10%</strong>
+          </span>
+        </div>
+        <span
+          className="mm-timeline__cursor"
+          style={{ left: `${Math.min(seconds / 45, 1) * 100}%` }}
+          aria-hidden="true"
+        />
+        <p className="mm-timeline__cap" aria-hidden="true">
+          Wagered matches cap at ±{MATCHMAKING.wageredMaxRangePercent}% no matter how long the
+          search runs.
+        </p>
+      </div>
       <div className="stat-grid">
         <div className="stat-pill">
           <span>Elapsed</span>

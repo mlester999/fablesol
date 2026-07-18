@@ -20,7 +20,6 @@ export function AvailabilityBadge({ feature, showNote = false }: AvailabilityBad
       <span className="availability-badge__symbol" aria-hidden="true">
         {status.symbol}
       </span>
-      <span className="sr-only">Feature status: </span>
       <span>{status.label}</span>
       {showNote && entry.note ? <em className="availability-badge__note">{entry.note}</em> : null}
     </span>

@@ -1,13 +1,101 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AvailabilityBadge } from './availability-badge';
 import { ConnectButton } from './connect-button';
+import { PublicNav } from './public-nav';
+import { SiteHeader } from './site-header';
 import { SocialIconLinks } from './social-links';
 import { SOCIAL_LINKS } from '@/lib/site-links';
 import { FEATURE_AVAILABILITY } from '@/content/game/availability';
 
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/docs',
+  useRouter: () => ({ push: vi.fn() }),
+}));
+
 afterEach(cleanup);
+
+describe('site header', () => {
+  it('offers the consistent premium navigation set with an active state', () => {
+    render(<SiteHeader />);
+    expect(screen.getByText('Fablesol')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'How to Play' })).toBeTruthy();
+    const docsLink = screen.getByRole('link', { name: 'Docs' });
+    expect(docsLink.getAttribute('aria-current')).toBe('page');
+    expect(screen.getByRole('button', { name: /Search/ })).toBeTruthy();
+    expect(screen.getAllByRole('button', { name: 'Connect' }).length).toBeGreaterThan(0);
+  });
+
+  it('shows the honest project status on inner pages too', () => {
+    render(<SiteHeader />);
+    expect(screen.getByText('In development')).toBeTruthy();
+  });
+
+  it('exposes only Discord and X as social platforms', () => {
+    const { container } = render(<SiteHeader />);
+    const socialText = container.textContent ?? '';
+    expect(socialText).not.toMatch(/telegram|instagram|facebook|youtube|tiktok|reddit/i);
+  });
+});
+
+describe('shared public navigation', () => {
+  async function openDrawerLinkLabels(header: HTMLElement): Promise<string[]> {
+    const user = userEvent.setup();
+    await user.click(within(header).getByRole('button', { name: /open menu/i }));
+    const drawer = within(header).getByRole('dialog', { name: /mobile navigation/i });
+    return within(drawer)
+      .getAllByRole('link')
+      .map((link) => link.textContent ?? '');
+  }
+
+  it('renders one identical mobile drawer for both surfaces', async () => {
+    const inner = render(<PublicNav variant="inner" />);
+    const innerLinks = await openDrawerLinkLabels(inner.container.querySelector('header')!);
+    cleanup();
+    const landing = render(<PublicNav variant="landing" />);
+    const landingLinks = await openDrawerLinkLabels(landing.container.querySelector('header')!);
+    expect(innerLinks).toEqual(landingLinks);
+    expect(innerLinks).toEqual(['How to Play', 'Docs', 'FAQ', 'Glossary', 'Play status']);
+  });
+
+  it('keeps the same structure across variants — only the surface class changes', () => {
+    const inner = render(<PublicNav variant="inner" />);
+    const innerHeader = inner.container.querySelector('header')!;
+    const innerParts = [
+      '.public-nav__brand',
+      '.public-nav__status',
+      '.public-nav__links',
+      '.public-nav__search',
+      '.public-nav__socials',
+      '.public-nav__connect',
+      '.mobile-nav-toggle',
+    ].map((selector) => innerHeader.querySelector(selector) !== null);
+    cleanup();
+    const landing = render(<PublicNav variant="landing" />);
+    const landingHeader = landing.container.querySelector('header')!;
+    const landingParts = [
+      '.public-nav__brand',
+      '.public-nav__status',
+      '.public-nav__links',
+      '.public-nav__search',
+      '.public-nav__socials',
+      '.public-nav__connect',
+      '.mobile-nav-toggle',
+    ].map((selector) => landingHeader.querySelector(selector) !== null);
+    expect(innerParts).toEqual([true, true, true, true, true, true, true]);
+    expect(landingParts).toEqual(innerParts);
+    expect(innerHeader.className).toContain('public-nav--inner');
+    expect(landingHeader.className).toContain('public-nav--landing');
+  });
+
+  it('marks the active route in the primary links', () => {
+    render(<PublicNav variant="landing" />);
+    const nav = screen.getByRole('navigation', { name: 'Primary' });
+    const docsLink = within(nav).getByRole('link', { name: 'Docs' });
+    expect(docsLink.getAttribute('aria-current')).toBe('page');
+  });
+});
 
 describe('social links', () => {
   it('approves only Discord and X', () => {

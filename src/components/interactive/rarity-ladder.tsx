@@ -31,9 +31,19 @@ export function RarityLadder() {
           return (
             <div className="rarity-step" data-active={active} key={range.rarity + range.minLevel}>
               <span>
-                Levels {range.minLevel}–{range.maxLevel}
+                {range.minLevel === range.maxLevel
+                  ? `Level ${range.minLevel}`
+                  : `Levels ${range.minLevel}–${range.maxLevel}`}
               </span>
-              <strong>{range.rarity}</strong>
+              <strong>
+                <span
+                  className="rarity-dot"
+                  data-rarity={range.rarity.toLowerCase()}
+                  aria-hidden="true"
+                />
+                {range.rarity}
+                {range.minLevel === 50 ? ' · 1% Divine chance' : ''}
+              </strong>
             </div>
           );
         })}

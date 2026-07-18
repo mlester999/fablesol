@@ -1,6 +1,16 @@
 import Link from 'next/link';
-import type { DocumentationBlock } from '@/content/docs/types';
+import type { CalloutTone, DocumentationBlock } from '@/content/docs/types';
 import { InteractiveMount } from '@/components/interactive/interactive-mount';
+
+/** Tone symbol + spoken label — tone is never conveyed by color alone. */
+const CALLOUT_TONES: Record<CalloutTone, { readonly symbol: string; readonly label: string }> = {
+  tip: { symbol: '✦', label: 'Tip' },
+  important: { symbol: '!', label: 'Important' },
+  rule: { symbol: '§', label: 'Rule' },
+  safety: { symbol: '⚠', label: 'Safety' },
+  provisional: { symbol: '⚖', label: 'Provisional' },
+  example: { symbol: '✎', label: 'Example' },
+};
 
 export function DocBlocks({ blocks }: { readonly blocks: readonly DocumentationBlock[] }) {
   return (
@@ -8,10 +18,19 @@ export function DocBlocks({ blocks }: { readonly blocks: readonly DocumentationB
       {blocks.map((block, index) => {
         const key = `${block.type}-${index}`;
         if (block.type === 'callout') {
+          const tone = CALLOUT_TONES[block.tone];
           return (
             <aside className="docs-callout" data-tone={block.tone} key={key}>
-              <strong>{block.title}</strong>
-              <p style={{ margin: 0 }}>{block.text}</p>
+              <div className="docs-callout__head">
+                <span className="docs-callout__icon" aria-hidden="true">
+                  {tone.symbol}
+                </span>
+                <strong>
+                  <span className="sr-only">{tone.label}: </span>
+                  {block.title}
+                </strong>
+              </div>
+              <p>{block.text}</p>
             </aside>
           );
         }

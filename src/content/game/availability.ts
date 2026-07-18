@@ -93,6 +93,18 @@ export const FEATURE_AVAILABILITY = [
   { id: 'housing', name: 'Housing and decoration', status: 'planned' },
   { id: 'exploration', name: 'Exploration', status: 'planned' },
   { id: 'social', name: 'Social multiplayer', status: 'planned' },
+  {
+    id: 'farm-visits',
+    name: 'Personal farm visits',
+    status: 'planned',
+    note: 'This approved feature is planned and is not available in the current game build.',
+  },
+  {
+    id: 'community-care',
+    name: 'Community Care',
+    status: 'planned',
+    note: 'Care benefit values are provisional and subject to balancing.',
+  },
   { id: 'inventory', name: 'Inventory', status: 'planned' },
   { id: 'copper', name: 'COPPER economy', status: 'planned' },
   {

@@ -18,12 +18,11 @@ import { GlossaryList } from '@/components/interactive/glossary-list';
 
 interface DocsShellProps {
   readonly page: DocumentationPage;
-  readonly index?: boolean;
 }
 
-export function DocsShell({ page, index = false }: DocsShellProps) {
+export function DocsShell({ page }: DocsShellProps) {
   const related = getRelatedDocumentationPages(page);
-  const neighbors = index ? undefined : getDocumentationNeighbors(page);
+  const neighbors = getDocumentationNeighbors(page);
   const crumbs = [
     { name: 'Home', route: '/' },
     { name: 'Documentation', route: '/docs' },
@@ -85,22 +84,35 @@ export function DocsShell({ page, index = false }: DocsShellProps) {
 
         <DocsMobileNav />
 
+        {page.content.length > 1 ? (
+          <details className="docs-outline">
+            <summary>On this page</summary>
+            <div className="docs-outline__body">
+              {page.content.map((sectionEntry) => (
+                <a href={`#${sectionEntry.id}`} key={sectionEntry.id}>
+                  {sectionEntry.title}
+                </a>
+              ))}
+            </div>
+          </details>
+        ) : null}
+
         <article className="docs-article">
           <p className="docs-eyebrow">{page.eyebrow}</p>
           <h1>{page.title}</h1>
           <p className="docs-lead">{page.description}</p>
           <p className="docs-meta">
-            Audience: {page.audience} · {DOCUMENTATION_REVISION} · Reviewed {page.lastReviewed}
+            <span>Audience: {page.audience}</span>
+            <span>{DOCUMENTATION_REVISION}</span>
+            <span>Reviewed {page.lastReviewed}</span>
+            {page.availability ? <AvailabilityBadge feature={page.availability} showNote /> : null}
           </p>
-          {page.availability ? (
-            <p className="docs-availability">
-              <AvailabilityBadge feature={page.availability} showNote />
-            </p>
-          ) : null}
 
           {page.content.map((section) => (
             <section className="docs-section" id={section.id} key={section.id}>
-              <h2>{section.title}</h2>
+              <h2>
+                <a href={`#${section.id}`}>{section.title}</a>
+              </h2>
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

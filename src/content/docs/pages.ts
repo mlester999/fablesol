@@ -9,12 +9,26 @@ import {
   CAT_COMPANION,
   CAT_DICE,
   DIVINE_CHANCE_AT_LEVEL_50,
+  BARN_ACCESS,
+  COMMUNITY_CARE,
   ECONOMY_NOTES,
   ENERGY,
   EQUIPMENT_RULES,
   EQUIPMENT_SLOTS,
   FAIR_PLAY,
   FAQ_ITEMS,
+  FARM_ANIMAL_TEMPERAMENT,
+  FARM_SHOWCASE,
+  FARM_SOCIAL_LIMITS,
+  FARM_VISIT_ABUSE,
+  FARM_VISIT_CAPACITY,
+  FARM_VISIBILITY_OPTIONS,
+  HELPER_ACTION_REQUIREMENTS,
+  LIVE_PRESENCE,
+  OFFLINE_VISITS,
+  VISIT_RECONNECTION,
+  VISITOR_INTERACTION_MODES,
+  VISITOR_RESTRICTIONS,
   GAME_NAME,
   GAME_PHILOSOPHY,
   GLOSSARY,
@@ -38,7 +52,7 @@ import type { DocumentationPage, DocumentationSection } from './types';
 
 const animalMaterialRows = ANIMALS.map((a) => [a.name, a.material] as const);
 const rarityRows = MATERIAL_RARITY_RANGES.map(
-  (r) => [`${r.minLevel}–${r.maxLevel}`, r.rarity, r.note ?? '—'] as const,
+  (r) => [`${r.minLevel}–${r.maxLevel}`, r.rarity, r.note ?? 'None'] as const,
 );
 const tierRows = LEVEL_TIERS.map(
   (t) =>
@@ -76,7 +90,6 @@ export const gettingStartedPage = definePage({
       ],
       [
         steps(ACCESS.accessSteps.map((s) => ({ title: s.title, text: s.text }))),
-        interactive('access-flow'),
         callout(
           'rule',
           'Access requirement',
@@ -145,6 +158,7 @@ export const gameplayOverviewPage = definePage({
         list([
           'Farming, animal care, fishing, mining, woodcutting',
           'Cooking, crafting, housing, exploration, social multiplayer',
+          'Live personal farm visits with Community Care (Planned)',
           'Player trading, Auction House, Copper Exchange pathways',
           'Permanent cat companion, Cat Dice, Cat Battle, tournaments',
           'COPPER off-chain economy and $FABLE on-chain access',
@@ -162,7 +176,7 @@ export const gameplayOverviewPage = definePage({
         callout(
           'tip',
           'Play your way',
-          'Care for animals, decorate, trade, or compete — the systems support different playstyles.',
+          'Care for animals, decorate, trade, or compete: the systems support different playstyles.',
         ),
       ],
     ),
@@ -213,6 +227,22 @@ export const playerProgressionPage = definePage({
         ]),
       ],
     ),
+    section(
+      'progress-is-social',
+      'Progress worth showing off',
+      [
+        'Progression also has a social face: once farm visits ship (Planned), your showcase animals, transformations, trophies, and achievements become part of a farm other players can admire live. Visitors can even help a little through Community Care, a small provisional assist that never replaces your own animal care.',
+      ],
+      [
+        links([
+          {
+            label: 'Farm visits',
+            href: '/docs/farm-visits',
+            description: 'Showcases, visitors, and Community Care',
+          },
+        ]),
+      ],
+    ),
   ],
 });
 
@@ -225,8 +255,8 @@ export const worldAndActivitiesPage = definePage({
   description: 'The approved main activity categories that shape daily life in Fablesol.',
   section: 'Cozy World',
   audience: 'Players',
-  keywords: ['world', 'activities', 'farming', 'gathering', 'crafting'],
-  related: ['farming', 'fishing', 'mining', 'housing', 'inventory'],
+  keywords: ['world', 'activities', 'farming', 'gathering', 'crafting', 'visiting'],
+  related: ['farming', 'fishing', 'mining', 'housing', 'farm-visits', 'inventory'],
   content: [
     section(
       'categories',
@@ -241,6 +271,14 @@ export const worldAndActivitiesPage = definePage({
           ACTIVITIES.map((a) => [a.name, a.summary]),
         ),
         interactive('activity-explorer'),
+        links([
+          {
+            label: 'Farm visits',
+            href: '/docs/farm-visits',
+            description:
+              'A planned social activity: visit friends’ farms live, admire showcases, and help within daily limits',
+          },
+        ]),
       ],
     ),
   ],
@@ -255,19 +293,36 @@ export const animalsPage = definePage({
   description: 'The five core farm animals and the materials they produce.',
   section: 'Cozy World',
   audience: 'Players',
-  keywords: ['animals', 'cow', 'pig', 'horse', 'chicken', 'goat', 'materials'],
-  related: ['animal-progression', 'materials', 'farming'],
+  keywords: ['animals', 'cow', 'pig', 'horse', 'chicken', 'goat', 'materials', 'temperament'],
+  related: ['animal-progression', 'materials', 'farming', 'farm-visits'],
   content: [
     section(
       'five',
       'Five core farm animals',
       [
-        'Each animal has a dedicated material. Goat produces Goat Wool — not goat milk — because Cow already supplies Milk.',
+        'Each animal has a dedicated material. Goat produces Goat Wool rather than goat milk, because Cow already supplies Milk.',
       ],
       [
         table('Animal material mapping', ['Animal', 'Material'], animalMaterialRows),
         list(ANIMALS.map((a) => `${a.name}: ${a.summary}`)),
         interactive('animal-progression'),
+      ],
+    ),
+    section(
+      'showcase-and-temperament',
+      'Showing off your animals',
+      [
+        'Farm animals normally stay on your personal farm, where visitors will be able to admire them once farm visits ship (Planned): showcase animals, transformations, and each animal’s Temperament: its social identity, separate from the cat’s Personality.',
+        'Visitors can pet and admire, but they can never collect materials or affect production. Only the owner benefits from the farm.',
+      ],
+      [
+        links([
+          {
+            label: 'Farm visits',
+            href: '/docs/farm-visits',
+            description: 'Showcase animals, temperament, and visitor rules',
+          },
+        ]),
       ],
     ),
   ],
@@ -291,7 +346,7 @@ export const animalProgressionPage = definePage({
       'Level 1 to level 50',
       [
         'Every farm animal progresses from level 1 to level 50. Higher levels unlock higher material rarities.',
-        'Visual transformation milestones appear every 10 levels. This is the same animal becoming more advanced visually — it does not reset.',
+        'Visual transformation milestones appear every 10 levels. This is the same animal becoming more advanced visually; it does not reset.',
       ],
       [
         list(['Level 1', 'Level 10', 'Level 20', 'Level 30', 'Level 40', 'Level 50']),
@@ -301,6 +356,18 @@ export const animalProgressionPage = definePage({
           'Level 50 Divine chance',
           `At level 50, materials are Mythic with a ${DIVINE_CHANCE_AT_LEVEL_50 * 100}% chance of Divine. Divine is not guaranteed.`,
         ),
+        callout(
+          'tip',
+          'Community Care is a small assist',
+          'Once farm visits ship (Planned), visitors can add up to a provisional 5% Animal Care progress per farm per UTC day. Community Care never improves material rarity, the Divine chance, or animal levels directly.',
+        ),
+        links([
+          {
+            label: 'Farm visits and Community Care',
+            href: '/docs/farm-visits',
+            description: 'Daily limits and what care can never do',
+          },
+        ]),
       ],
     ),
   ],
@@ -394,10 +461,20 @@ export const farmingPage = simpleActivityPage(
   'Crops',
   'How farming supports the cozy production loop.',
   ['farming', 'crops'],
-  ['animals', 'cooking', 'crafting'],
+  ['animals', 'cooking', 'crafting', 'farm-visits'],
   [
     'Farming is a core peaceful production activity. Crops support cooking, crafting, and the broader material economy.',
-    'Farming sits beside animal care rather than replacing it — both feed the player economy over time.',
+    'Farming sits beside animal care rather than replacing it; both feed the player economy over time.',
+    'Your crops live on your personal farm. Once farm visits ship (Planned), a visiting helper may water one approved crop as validated Community Care, but visitors can never harvest crops or claim your production.',
+  ],
+  [
+    links([
+      {
+        label: 'Farm visits',
+        href: '/docs/farm-visits',
+        description: 'Helper watering, Community Care limits, and visitor rules',
+      },
+    ]),
   ],
 );
 
@@ -467,10 +544,20 @@ export const housingPage = simpleActivityPage(
   'Housing',
   'Home',
   'Decorating and personalizing your space.',
-  ['housing', 'decorate'],
-  ['crafting', 'social', 'activities'],
+  ['housing', 'decorate', 'barn', 'showcase'],
+  ['crafting', 'social', 'farm-visits', 'activities'],
   [
     'Housing lets players personalize space for cozy expression and social presence. It is a lifestyle system, not a pay-to-win combat lever.',
+    'Decoration will have an audience: once farm visits ship (Planned), visitors admire your displays, trophies, and the public barn showcase area. Private management areas and storage stay owner-only, and visitors can never move, rotate, or delete your decorations.',
+  ],
+  [
+    links([
+      {
+        label: 'Farm visits',
+        href: '/docs/farm-visits',
+        description: 'Public showcase areas versus private owner areas',
+      },
+    ]),
   ],
 );
 
@@ -713,7 +800,6 @@ export const walletAccessPage = definePage({
           'On-chain token ownership in your wallet',
         ]),
         interactive('access-flow'),
-        steps(ACCESS.accessSteps.map((s) => ({ title: s.title, text: s.text }))),
         callout(
           'safety',
           'Seed phrases',
@@ -850,7 +936,7 @@ export const catBattleClassesPage = definePage({
   title: 'Battle Classes',
   eyebrow: 'Five roles',
   description:
-    'Fighter, Tank, Assassin, Support, and Controller — roles, tradeoffs, and soft counters.',
+    'Fighter, Tank, Assassin, Support, and Controller: roles, tradeoffs, and soft counters.',
   section: 'Cat Battle',
   audience: 'Competitive players',
   keywords: ['fighter', 'tank', 'assassin', 'support', 'controller'],
@@ -991,7 +1077,7 @@ export const catBattleStatusPage = definePage({
   route: '/docs/cat-battle/status-effects',
   title: 'Status effects',
   eyebrow: 'Five effects',
-  description: 'Heal, Shield, Bleed, Stun, and Weaken — the only approved status effects.',
+  description: 'Heal, Shield, Bleed, Stun, and Weaken: the only approved status effects.',
   section: 'Cat Battle',
   audience: 'Competitive players',
   keywords: ['heal', 'shield', 'bleed', 'stun', 'weaken'],
@@ -1026,7 +1112,7 @@ export const catBattlePowerPage = definePage({
   route: '/docs/cat-battle/battle-power',
   title: 'Battle Power',
   eyebrow: 'Build strength',
-  description: 'What Battle Power measures — and why wins do not change it.',
+  description: 'What Battle Power measures, and why wins do not change it.',
   section: 'Cat Battle',
   audience: 'Competitive players',
   keywords: ['battle power', 'matchmaking', 'build'],
@@ -1055,8 +1141,7 @@ export const catBattleEquipmentPage = definePage({
   route: '/docs/cat-battle/equipment',
   title: 'Equipment',
   eyebrow: 'Three slots',
-  description:
-    'Weapon, Armor, and Accessory — simple combat gear that contributes to Battle Power.',
+  description: 'Weapon, Armor, and Accessory: simple combat gear that contributes to Battle Power.',
   section: 'Cat Battle',
   audience: 'Competitive players',
   keywords: ['equipment', 'weapon', 'armor', 'accessory'],
@@ -1332,7 +1417,7 @@ export const tournamentsRewardsPage = definePage({
       'When refunds happen',
       [
         'Refunds are not automatic simply because a player loses, misses a match, or changes their mind after the deadline.',
-        'Refunds apply when an event cannot run as promised — cancellation, minimum participants not reached, or a qualifying failure.',
+        'Refunds apply when an event cannot run as promised: cancellation, minimum participants not reached, or a qualifying failure.',
       ],
       [
         links([
@@ -1383,14 +1468,31 @@ export const fairPlayPage = definePage({
   description: 'Allowed multi-accounting boundaries and prohibited exploitation patterns.',
   section: 'Rules and Support',
   audience: 'All players',
-  keywords: ['fair play', 'exploit', 'multi account', 'bots'],
-  related: ['security', 'tournaments/registration'],
+  keywords: ['fair play', 'exploit', 'multi account', 'bots', 'farm visit abuse'],
+  related: ['security', 'farm-visits', 'tournaments/registration'],
   content: [
     section(
       'principle',
       'Core principle',
       [FAIR_PLAY.multiAccountPrinciple, FAIR_PLAY.enforcementNote],
       [list([...FAIR_PLAY.prohibited])],
+    ),
+    section(
+      'farm-visit-abuse',
+      'Farm-visit abuse',
+      [
+        'The same principles cover the planned farm-visit and Community Care systems. Prohibited farm-visit abuse includes:',
+      ],
+      [
+        list([...FARM_VISIT_ABUSE]),
+        links([
+          {
+            label: 'Farm visits',
+            href: '/docs/farm-visits',
+            description: 'How visits, helpers, and Community Care work',
+          },
+        ]),
+      ],
     ),
   ],
 });
@@ -1438,7 +1540,7 @@ export const faqPage = definePage({
         'Answers follow confirmed product rules. For deeper detail, open the related guide linked under each topic in the full FAQ component on this page.',
       ],
       [
-        list(FAQ_ITEMS.map((f) => `${f.question} — ${f.answer}`)),
+        list(FAQ_ITEMS.map((f) => `${f.question} ${f.answer}`)),
         links(
           FAQ_ITEMS.slice(0, 8).map((f) => ({
             label: f.question,
@@ -1478,7 +1580,7 @@ export const firstDayPage = definePage({
   title: 'Your first day',
   eyebrow: 'Day one',
   description:
-    'A calm, step-by-step plan for your first session — from wallet access to your first materials.',
+    'A calm, step-by-step plan for your first session, from wallet access to your first materials.',
   section: 'Getting Started',
   audience: 'New players',
   keywords: ['first day', 'first session', 'new player', 'start', 'orientation'],
@@ -1503,7 +1605,7 @@ export const firstDayPage = definePage({
           },
           {
             title: 'Say hello to your animals',
-            text: 'The five farm animals — Cow, Pig, Horse, Chicken, Goat — each produce their own material.',
+            text: 'The five farm animals (Cow, Pig, Horse, Chicken, Goat) each produce their own material.',
           },
           {
             title: 'Meet your permanent cat',
@@ -1511,7 +1613,7 @@ export const firstDayPage = definePage({
           },
           {
             title: 'Pick one cozy activity',
-            text: 'Farm, fish, mine, cut wood, cook, craft, or decorate — whatever sounds pleasant.',
+            text: 'Farm, fish, mine, cut wood, cook, craft, or decorate: whatever sounds pleasant.',
           },
           {
             title: 'Learn the two currencies',
@@ -1522,7 +1624,7 @@ export const firstDayPage = definePage({
         callout(
           'tip',
           'No rush',
-          'Animal levels, materials, and the economy reward steady play over weeks — not a perfect first hour.',
+          'Animal levels, materials, and the economy reward steady play over weeks, not a perfect first hour.',
         ),
         links([
           {
@@ -1561,13 +1663,280 @@ export const socialPage = simpleActivityPage(
   'Social multiplayer',
   'Together',
   'Sharing the world with other players in a welcoming multiplayer environment.',
-  ['social', 'multiplayer', 'friends'],
-  ['exploration', 'housing', 'player-trading'],
+  ['social', 'multiplayer', 'friends', 'farm visits'],
+  ['farm-visits', 'exploration', 'housing', 'player-trading'],
   [
-    'Fablesol is a shared world. Social play means being present with other players — visiting spaces, decorating, trading, and enjoying activities side by side.',
+    'Fablesol is a shared world. Social play means being present with other players: visiting spaces, decorating, trading, and enjoying activities side by side.',
+    'The centerpiece of planned social play is visiting personal farms: live shared spaces where you see the owner and other visitors move, emote, and help in real time.',
     'Social features never gate cozy progression: playing quietly is always a valid style.',
   ],
+  [
+    links([
+      {
+        label: 'Farm visits',
+        href: '/docs/farm-visits',
+        description: 'Visit friends’ farms live: presence, permissions, and Community Care',
+      },
+    ]),
+  ],
 );
+
+export const farmVisitsPage = definePage({
+  slug: 'farm-visits',
+  availability: 'farm-visits',
+  route: '/docs/farm-visits',
+  title: 'Farm visits',
+  eyebrow: 'Live social farms',
+  description:
+    'Visit other players’ personal farms live: realtime presence, visibility settings, visitor modes, showcase animals, Community Care, and what visitors can never do.',
+  section: 'Cozy World',
+  audience: 'Players',
+  keywords: [
+    'farm visits',
+    'personal farm',
+    'visit',
+    'community care',
+    'presence',
+    'showcase',
+    'guestbook',
+    'helpers',
+  ],
+  related: ['social', 'animals', 'housing', 'fair-play'],
+  content: [
+    section('what', 'What personal farm visits are', [
+      'Every player will have a personal farm: your private production and management space, and at the same time a social showroom where visitors admire your animals, transformations, temperaments, decorations, trophies, and achievements.',
+      'Farm animals normally stay on the personal farm, while your permanent cat remains your companion throughout the shared public world.',
+      'Farm visits are live online multiplayer experiences: the owner sees visitors arrive in real time, and visitors see the owner and each other while they explore.',
+    ]),
+    section(
+      'presence',
+      'Live presence',
+      [
+        'A personal farm acts as one shared multiplayer space. Everyone inside the same farm visit will eventually see:',
+      ],
+      [
+        list(LIVE_PRESENCE.events),
+        callout('example', 'A live visit in practice', LIVE_PRESENCE.example),
+      ],
+    ),
+    section(
+      'visibility',
+      'Farm visibility',
+      ['The owner chooses who may enter. There are exactly four visibility options:'],
+      [
+        table(
+          'Farm visibility options',
+          ['Option', 'Who may enter'],
+          FARM_VISIBILITY_OPTIONS.map((option) => [option.name, option.description]),
+        ),
+      ],
+    ),
+    section(
+      'modes',
+      'Visitor interaction modes',
+      [
+        'Separately from visibility, the owner selects what visitors may do. Each mode includes everything from the mode before it.',
+      ],
+      [
+        interactive('farm-visit-explorer'),
+        ...VISITOR_INTERACTION_MODES.map((mode) =>
+          callout('tip', mode.name, `${mode.summary} ${mode.note}`),
+        ),
+      ],
+    ),
+    section(
+      'capacity',
+      'Visit capacity',
+      [
+        'Daily sightseeing visits are unlimited, and you may revisit the same farm as often as you like.',
+        FARM_VISIT_CAPACITY.entryNote,
+      ],
+      [
+        table(
+          'Capacity of one live farm visit',
+          ['Rule', 'Value'],
+          [
+            ['Maximum simultaneous visitors', String(FARM_VISIT_CAPACITY.maxVisitors)],
+            ['Does the owner count as a visitor?', 'No'],
+            [
+              'Maximum players in one farm instance',
+              `${FARM_VISIT_CAPACITY.maxTotalPlayers} (owner + ${FARM_VISIT_CAPACITY.maxVisitors} visitors)`,
+            ],
+            ['Daily sightseeing visits', 'Unlimited'],
+          ],
+        ),
+        callout(
+          'example',
+          'When a farm is full',
+          `Future gameplay may show a clear message such as “${FARM_VISIT_CAPACITY.fullMessage}”`,
+        ),
+      ],
+    ),
+    section(
+      'showcase',
+      'Showcase animals',
+      [
+        `Show off your progress: up to ${FARM_SHOWCASE.maxProfileShowcaseAnimals} Showcase Animals on your player profile, and up to ${FARM_SHOWCASE.maxEntranceShowcaseAnimals} featured near the farm entrance or showcase pen.`,
+        FARM_SHOWCASE.prestigeNote,
+      ],
+      [
+        table(
+          'What visitors can and cannot inspect',
+          ['Public animal information', 'Always private'],
+          FARM_SHOWCASE.publicInfo.map((publicItem, index) => [
+            publicItem,
+            FARM_SHOWCASE.privateInfo[index] ?? 'None',
+          ]),
+        ),
+      ],
+    ),
+    section('temperament', 'Farm-animal temperament', [
+      FARM_ANIMAL_TEMPERAMENT.catTermNote,
+      `Example temperaments could include ${FARM_ANIMAL_TEMPERAMENT.exampleValues.join(', ')}. ${FARM_ANIMAL_TEMPERAMENT.exampleNote}`,
+      'Temperament shapes idle behavior, reactions, social animations, and identity. It never increases material rarity, the 1% Divine chance, or COPPER generation.',
+    ]),
+    section(
+      'barn',
+      'Barn access',
+      [
+        'Barns have two faces: a public showcase area visitors may enjoy, and a private owner area that stays closed in every mode.',
+        BARN_ACCESS.rule,
+      ],
+      [
+        table(
+          'Public showcase versus private owner area',
+          ['Public showcase area', 'Private owner area'],
+          BARN_ACCESS.publicShowcase.map((publicItem, index) => [
+            publicItem,
+            BARN_ACCESS.privateOwnerArea[index] ?? 'None',
+          ]),
+        ),
+      ],
+    ),
+    section(
+      'social-limits',
+      'Social interactions and limits',
+      ['Social play is encouraged, with a few honest limits:'],
+      [
+        list([
+          `Farm Appreciation: ${FARM_SOCIAL_LIMITS.farmAppreciation}`,
+          `Guestbook: ${FARM_SOCIAL_LIMITS.guestbook}`,
+          `Animal petting: ${FARM_SOCIAL_LIMITS.petting}`,
+          `Emotes, sitting, and photo areas: ${FARM_SOCIAL_LIMITS.emotes}`,
+        ]),
+      ],
+    ),
+    section(
+      'community-care',
+      'Community Care',
+      [
+        'Visitors on farms with Allow Helpers enabled can contribute small, validated care actions. All Community Care limits reset on the UTC day.',
+      ],
+      [
+        table(
+          'Community Care limits (UTC day)',
+          ['Rule', 'Value'],
+          [
+            [
+              'Valid contributions one farm may receive',
+              `${COMMUNITY_CARE.maxContributionsPerFarmPerDay} per UTC day`,
+            ],
+            [
+              'Valid contributions from one visitor to the same farm',
+              `${COMMUNITY_CARE.maxContributionsPerVisitorPerFarmPerDay} per UTC day`,
+            ],
+            [
+              'Different players required?',
+              'Yes; each valid contribution needs a different player',
+            ],
+            [
+              'Farms one helper may validly care for',
+              `${COMMUNITY_CARE.maxFarmsHelpedPerVisitorPerDay} per UTC day`,
+            ],
+            [
+              'Benefit per valid contribution',
+              `${COMMUNITY_CARE.benefitPerContributionPercent}% Animal Care progress`,
+            ],
+            [
+              'Maximum daily benefit',
+              `${COMMUNITY_CARE.maxDailyBenefitPercent}% Animal Care progress`,
+            ],
+          ],
+        ),
+        callout('provisional', 'Provisional balancing values', COMMUNITY_CARE.provisionalLabel),
+        callout('rule', 'The Community Care rule', COMMUNITY_CARE.coreRule),
+        list([
+          COMMUNITY_CARE.repeatVisitNote,
+          COMMUNITY_CARE.afterCapNote,
+          COMMUNITY_CARE.resetRule,
+        ]),
+      ],
+    ),
+    section(
+      'care-never',
+      'What Community Care never does',
+      ['Community Care is social assistance only. It must never:'],
+      [list(COMMUNITY_CARE.never)],
+    ),
+    section(
+      'helpers',
+      'Helper actions',
+      [
+        'When the owner enables Allow Helpers, visitors may perform small approved actions such as watering one crop, brushing one animal, cleaning one approved barn area, or refilling one basic water trough.',
+        'Every helper action must pass all of these checks before it counts:',
+      ],
+      [
+        list(HELPER_ACTION_REQUIREMENTS, true),
+        callout(
+          'tip',
+          'Details arrive later',
+          'Exact animation lengths, cooldowns, object lists, and task rotations are documented only when approved.',
+        ),
+      ],
+    ),
+    section(
+      'restrictions',
+      'What visitors can never do',
+      [],
+      [
+        callout('rule', 'The visitor rule', VISITOR_RESTRICTIONS.coreRule),
+        list(VISITOR_RESTRICTIONS.never),
+      ],
+    ),
+    section(
+      'offline',
+      'Visits while the owner is offline',
+      [...OFFLINE_VISITS.direction],
+      [callout('provisional', 'Not finalized', OFFLINE_VISITS.unresolvedNote)],
+    ),
+    section(
+      'reconnection',
+      'Losing connection during a visit',
+      ['If your connection briefly drops during a visit, the game aims to be forgiving:'],
+      [list(VISIT_RECONNECTION.promises)],
+    ),
+    section(
+      'fair-play',
+      'Fair play in farm visits',
+      ['Farm-visit abuse falls under the general fair-play rules. Prohibited behavior includes:'],
+      [
+        list(FARM_VISIT_ABUSE),
+        links([
+          {
+            label: 'Fair play',
+            href: '/docs/fair-play',
+            description: 'The full fair-play principles',
+          },
+          {
+            label: 'Time and UTC',
+            href: '/docs/utc',
+            description: 'How UTC daily resets work',
+          },
+        ]),
+      ],
+    ),
+  ],
+});
 
 export const npcSellingPage = definePage({
   slug: 'npc-selling',
@@ -1652,7 +2021,7 @@ export const catPersonalityPage = definePage({
   title: 'Cat Personality',
   eyebrow: 'Identity',
   description:
-    'Personality gives your permanent cat identity and a small passive effect — separate from Battle Class.',
+    'Personality gives your permanent cat identity and a small passive effect, separate from Battle Class.',
   section: 'Your Cat',
   audience: 'Players',
   keywords: ['personality', 'cat identity', 'passive effect'],
@@ -1662,7 +2031,7 @@ export const catPersonalityPage = definePage({
       'what',
       'What Personality is',
       [
-        'Every permanent cat has a Personality. It represents who your cat is — not how it fights.',
+        'Every permanent cat has a Personality. It represents who your cat is, not how it fights.',
         'Personality provides a small passive effect. Exact personality names, effects, and values are documented when confirmed.',
       ],
       [
@@ -1688,7 +2057,7 @@ export const tournamentsRefundsPage = definePage({
   route: '/docs/tournaments/refunds',
   title: 'Tournament refunds',
   eyebrow: 'When fees return',
-  description: 'Exactly when tournament entrance fees are refunded — and when they are not.',
+  description: 'Exactly when tournament entrance fees are refunded, and when they are not.',
   section: 'Tournaments',
   audience: 'Competitive players',
   keywords: ['refunds', 'cancellation', 'entrance fee', 'minimum players'],
@@ -1745,6 +2114,7 @@ export const DOCUMENTATION_PAGES = [
   housingPage,
   explorationPage,
   socialPage,
+  farmVisitsPage,
   inventoryPage,
   economyPage,
   copperPage,

@@ -18,18 +18,18 @@ export const ACCESS = {
     },
     {
       id: 'holdings',
-      title: 'Meet the $FABLE holding requirement',
-      text: 'Hold at least 10,000 $FABLE in the connected wallet to satisfy the game access requirement.',
+      title: 'Meet the access requirement',
+      text: 'Hold at least 10,000 $FABLE in the connected wallet.',
     },
     {
       id: 'enter',
       title: 'Enter Fablesol',
-      text: 'Once the access requirement is met, you can enter the world and create or continue your in-game player profile.',
+      text: 'When access is confirmed, enter the world and use your player profile.',
     },
     {
       id: 'play',
-      title: 'Play in the off-chain economy',
-      text: 'Cozy activities, COPPER balances, animals, materials, Cat Dice, Cat Battle, and tournaments run as in-game systems. They are separate from on-chain $FABLE ownership.',
+      title: 'Play through in-game systems',
+      text: 'Activities, COPPER, animals, materials, Cat Dice, Cat Battle, and tournaments all run in the game itself.',
     },
   ],
   disclaimer:

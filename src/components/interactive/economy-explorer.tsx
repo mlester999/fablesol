@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { FlowDiagram, FlowIconCoin, FlowIconWallet } from '@/components/site/flow-diagram';
 
 const LAYERS = [
   {
@@ -77,48 +78,31 @@ export function EconomyExplorer() {
           </button>
         ))}
       </div>
-      <svg className="diagram-svg" viewBox="0 0 640 180" role="img" aria-label={layer.title}>
-        {layer.nodes.map((node, index) => {
-          const x = 20 + index * 120;
-          return (
-            <g key={node}>
-              {index < layer.nodes.length - 1 ? (
-                <path
-                  d={`M ${x + 90} 90 H ${x + 120}`}
-                  stroke="#2f5d46"
-                  strokeWidth="2"
-                  fill="none"
-                />
-              ) : null}
-              <rect
-                x={x}
-                y={55}
-                width={100}
-                height={70}
-                rx="12"
-                fill="#fffdf7"
-                stroke="#1c2a22"
-                strokeOpacity="0.18"
-              />
-              <text x={x + 50} y={95} textAnchor="middle" fontSize="11" fill="#1c2a22">
-                {node.split(' ').map((word, wordIndex) => (
-                  <tspan key={word + wordIndex} x={x + 50} dy={wordIndex === 0 ? 0 : 14}>
-                    {word}
-                  </tspan>
-                ))}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
+      <FlowDiagram
+        label={layer.title}
+        accent="moss"
+        steps={layer.nodes.map((node) => ({ title: node }))}
+      />
       <p className="live-region" aria-live="polite">
         {layer.text}
       </p>
-      <p>
-        Full text flow: Animals → Materials → Crafting/trading → Copper Exchange → COPPER → Auction
-        House / participation → other players → continued circulation. Separately: Wallet → 10,000
-        $FABLE → game access.
-      </p>
+      <div className="economy-gate" role="group" aria-label="On-chain access, separate from COPPER">
+        <span className="economy-gate__track" data-kind="copper">
+          <FlowIconCoin />
+          <span>
+            <strong>COPPER circulation:</strong> animals → materials → crafting and trading → Copper
+            Exchange → COPPER → Auction House and participation → other players → continued
+            circulation. Entirely off-chain.
+          </span>
+        </span>
+        <span className="economy-gate__track" data-kind="fable">
+          <FlowIconWallet />
+          <span>
+            <strong>$FABLE access gate:</strong> wallet → 10,000 $FABLE → game access. On-chain, and
+            never an automatic COPPER conversion.
+          </span>
+        </span>
+      </div>
     </div>
   );
 }
