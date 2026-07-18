@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3600
+    },
+    {
+      "name": "fablesol-admin",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "admin:dev"],
+      "port": 3601
     }
   ]
 }

@@ -48,5 +48,72 @@ profiles, and gameplay tables arrive in Phase 2+ as real needs appear.
 - Missing configuration degrades gracefully: clients return `undefined` and
   public pages render normally.
 
+## Phase 2A: admin authorization and operations schema
+
+Phase 2A adds four migrations (roles/permissions/members/invitations/audit
+log, the seeded system catalog, authorization + invitation + member
+functions, and announcements/maintenance/features/settings). They are
+**created and statically validated locally; nothing is applied to the hosted
+project automatically.**
+
+Every remote command runs through `scripts/admin/guard.mjs`, which verifies
+the target is the Fablesol project (the Starville reference project is
+deny-listed by SHA-256 fingerprint) and enforces explicit approval gates.
+
+### One-time environment setup for the admin portal
+
+The admin app reads the same root `.env.local` through a symlink (gitignored,
+recreate after a fresh clone):
+
+```bash
+ln -s ../../.env.local apps/admin/.env.local
+```
+
+Optional admin-only keys: `NEXT_PUBLIC_ADMIN_URL` (defaults to
+`http://localhost:3601`; set to the deployed admin origin in production —
+invitation links are built from it) and `NEXT_PUBLIC_ADMIN_ENV_LABEL`
+(environment badge in the portal header).
+
+### Owner: apply the Phase 2A migrations
+
+```bash
+# One-time: link the CLI to the Fablesol project (no Docker, remote only)
+npx supabase link --project-ref <fablesol-project-ref>
+
+npm run db:verify-target        # confirm the guarded target
+npm run db:migrations:list      # see remote vs local migrations
+npm run db:migrations:dry-run   # preview what a push would apply
+
+# Approve writes for this session, then push
+SUPABASE_REMOTE_WRITES_APPROVED=true npm run db:migrations:push
+
+npm run db:lint:hosted          # optional: lint public+private schemas
+```
+
+### Owner: create the first Super Admin
+
+```bash
+# Dry run (no writes)
+npm run admin:bootstrap -- --email you@example.com --full-name "Your Name"
+
+# Apply (single-use by construction; the database refuses a second active Super Admin)
+ADMIN_BOOTSTRAP_ENABLED=true npm run admin:bootstrap -- \
+  --email you@example.com --full-name "Your Name" --apply --print-recovery-link
+```
+
+Open the printed one-time recovery link to set your password, then sign in at
+the admin portal (`npm run admin:dev`, port 3601). Further administrators are
+invited from the portal's Team page — never by editing the database.
+
+### Owner: hosted read-only smoke tests
+
+```bash
+RUN_HOSTED_SUPABASE_TESTS=true npm run db:test:hosted
+```
+
+These use only the anon key: they confirm the fail-safe public read
+functions respond and that RLS denies anonymous reads of administrator
+tables. They never write.
+
 None of this file's contents may appear in public `/docs` — that space is
 player documentation only.

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Fablesol — cozy multiplayer farming game: landing, How to Play, player docs, and shared game-rule source of truth",
+  "workspaces": [
+    "apps/admin"
+  ],
   "scripts": {
     "dev": "next dev -p 3600",
     "build": "next build",
@@ -13,7 +16,24 @@
     "test:watch": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "supabase:health": "node scripts/supabase-health.mjs"
+    "supabase:health": "node scripts/supabase-health.mjs",
+    "admin:dev": "npm run dev --workspace=fablesol-admin",
+    "admin:build": "npm run build --workspace=fablesol-admin",
+    "admin:start": "npm run start --workspace=fablesol-admin",
+    "admin:lint": "npm run lint --workspace=fablesol-admin",
+    "admin:typecheck": "npm run typecheck --workspace=fablesol-admin",
+    "admin:test": "npm run test --workspace=fablesol-admin",
+    "admin:bootstrap": "node scripts/admin/bootstrap-super-admin.mjs",
+    "lint:all": "npm run lint && npm run admin:lint",
+    "typecheck:all": "npm run typecheck && npm run admin:typecheck",
+    "test:all": "npm run test && npm run admin:test",
+    "build:all": "npm run build && npm run admin:build",
+    "db:verify-target": "node scripts/admin/remote-db.mjs verify",
+    "db:migrations:list": "node scripts/admin/remote-db.mjs list",
+    "db:migrations:dry-run": "node scripts/admin/remote-db.mjs dry-run",
+    "db:migrations:push": "node scripts/admin/remote-db.mjs push",
+    "db:lint:hosted": "node scripts/admin/remote-db.mjs lint",
+    "db:test:hosted": "node scripts/admin/hosted-db-tests.mjs"
   },
   "engines": {
     "node": ">=20.9.0"

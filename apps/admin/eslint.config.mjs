@@ -6,8 +6,7 @@ const eslintConfig = [
   ...nextVitals,
   ...nextTs,
   {
-    // apps/** have their own lint configs (run via `npm run admin:lint`).
-    ignores: ['.next/**', 'node_modules/**', 'out/**', 'coverage/**', 'apps/**'],
+    ignores: ['.next/**', 'node_modules/**', 'out/**', 'coverage/**'],
   },
 ];
 
