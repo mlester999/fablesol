@@ -107,6 +107,14 @@ export function WalletAccessButton({
         }}
       >
         <div className="connect-dialog__body">
+          <button
+            type="button"
+            className="connect-dialog__close"
+            aria-label="Close wallet connection"
+            onClick={close}
+          >
+            <CloseGlyph />
+          </button>
           <p className="docs-eyebrow">Wallet connection</p>
           <h2 id={headingId}>Connect a Solana wallet</h2>
           {open ? (
@@ -137,9 +145,6 @@ export function WalletAccessButton({
                   <Link className="btn btn-secondary" href="/docs/access" onClick={close}>
                     Read the access guide
                   </Link>
-                  <button type="button" className="btn btn-ghost" onClick={close}>
-                    Close
-                  </button>
                 </div>
               </>
             )
@@ -147,6 +152,28 @@ export function WalletAccessButton({
         </div>
       </dialog>
     </>
+  );
+}
+
+/** Decorative X mark; the owning button carries the accessible label. */
+export function CloseGlyph() {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3.5 3.5 L12.5 12.5 M12.5 3.5 L3.5 12.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 

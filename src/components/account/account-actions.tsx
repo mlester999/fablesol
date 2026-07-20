@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
+import { CloseGlyph } from '@/components/site/connect-button';
 import { getPublicEnv } from '@/lib/env';
 import { logoutPlayer, renewAccess } from '@/lib/wallet/client';
 import { isSolanaNetwork, type SolanaNetwork } from '@/lib/wallet/config';
@@ -171,17 +172,18 @@ export function ReplaceWalletButton() {
         }}
       >
         <div className="connect-dialog__body">
+          <button
+            type="button"
+            className="connect-dialog__close"
+            aria-label="Close wallet connection"
+            onClick={close}
+          >
+            <CloseGlyph />
+          </button>
           <p className="docs-eyebrow">Wallet replacement</p>
           <h2 id={headingId}>Replace your linked wallet</h2>
           {!open ? null : !configured ? (
-            <>
-              <p>Wallet connection is not available right now, so wallets cannot be replaced.</p>
-              <div className="cta-row">
-                <button type="button" className="btn btn-ghost" onClick={close}>
-                  Close
-                </button>
-              </div>
-            </>
+            <p>Wallet connection is not available right now, so wallets cannot be replaced.</p>
           ) : !confirmed ? (
             <>
               <p>

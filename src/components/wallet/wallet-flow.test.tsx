@@ -104,17 +104,29 @@ describe('insufficient-balance state', () => {
     expect(screen.queryByText('Check access now')).toBeNull();
   });
 
-  it('offers Refresh balance, Account, Log out, and Close', async () => {
+  it('offers Refresh balance, Account, and Log out with no bottom Close button', async () => {
     renderFlow();
     await screen.findByText(/Not enough \$FABLE yet/);
 
     expect(screen.getByRole('button', { name: 'Refresh balance' })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Account' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Log out' })).toBeTruthy();
-    expect(screen.getByRole('button', { name: 'Close' })).toBeTruthy();
+    // Dismissal now lives only on the dialog's corner X; no redundant
+    // Close action is announced inside the flow.
+    expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
     // The real verified balance and requirement are shown; nothing fabricated.
     expect(screen.getByText('1,002 $FABLE')).toBeTruthy();
     expect(screen.getByText(/Hold at least 10,000 \$FABLE/)).toBeTruthy();
+  });
+
+  it('never calls logout or wallet disconnection when the flow is merely dismissed', async () => {
+    const onClose = vi.fn();
+    renderFlow({ onClose });
+    await screen.findByText(/Not enough \$FABLE yet/);
+
+    // Dismissal is triggered by the host dialog, not by any flow action.
+    // Only the explicit Log out button may end the player session.
+    expect(logoutPlayerMock).not.toHaveBeenCalled();
   });
 });
 

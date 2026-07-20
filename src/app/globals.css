@@ -3118,9 +3118,50 @@ ol.docs-list {
 }
 
 .connect-dialog__body {
+  position: relative;
   display: grid;
   gap: 0.8rem;
   padding: var(--card-pad);
+}
+
+/* Keep the header clear of the corner close control. */
+.connect-dialog__body > .docs-eyebrow,
+.connect-dialog__body > h2 {
+  padding-right: 2.75rem;
+}
+
+.connect-dialog__close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--fb-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fb-ink);
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease;
+}
+
+.connect-dialog__close:hover {
+  background: var(--fb-surface-soft, rgb(0 0 0 / 6%));
+  border-color: var(--fb-line-strong);
+}
+
+.connect-dialog__close:active {
+  background: var(--fb-line);
+}
+
+.connect-dialog__close:focus-visible {
+  outline: 2px solid var(--fb-accent, #2e7d5b);
+  outline-offset: 2px;
 }
 
 .connect-dialog__body h2 {

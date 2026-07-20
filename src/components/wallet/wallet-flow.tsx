@@ -492,9 +492,6 @@ export function WalletFlow({
             >
               Try again
             </button>
-            <button type="button" className="btn btn-ghost" onClick={cancelAndClose}>
-              Close
-            </button>
           </div>
         </>
       ) : null}
@@ -502,8 +499,8 @@ export function WalletFlow({
       {effectivePhase === 'flow_error' && flowError !== null ? (
         <>
           <p role="alert">{flowError.message}</p>
-          <div className="cta-row">
-            {flowError.retryable ? (
+          {flowError.retryable ? (
+            <div className="cta-row">
               <button
                 type="button"
                 className="btn btn-primary"
@@ -511,11 +508,8 @@ export function WalletFlow({
               >
                 Try again
               </button>
-            ) : null}
-            <button type="button" className="btn btn-ghost" onClick={cancelAndClose}>
-              Close
-            </button>
-          </div>
+            </div>
+          ) : null}
         </>
       ) : null}
 
@@ -723,9 +717,6 @@ function AccessPanel({
         </Link>
         <button type="button" className="btn btn-ghost" onClick={onLogout} disabled={busy}>
           Log out
-        </button>
-        <button type="button" className="btn btn-ghost" onClick={onClose}>
-          Close
         </button>
       </div>
 
