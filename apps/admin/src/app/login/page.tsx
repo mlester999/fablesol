@@ -28,7 +28,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       }
     >
       {notice ? (
-        <Notice tone={notice.includes('updated') || notice.includes('signed out') ? 'success' : 'warning'}>
+        <Notice
+          tone={notice.includes('updated') || notice.includes('signed out') ? 'success' : 'warning'}
+        >
           {notice}
         </Notice>
       ) : null}

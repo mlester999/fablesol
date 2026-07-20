@@ -117,3 +117,68 @@ tables. They never write.
 
 None of this file's contents may appear in public `/docs` — that space is
 player documentation only.
+
+## Phase 2B: player identity, wallets, and $FABLE access schema
+
+Phase 2B adds four migrations:
+
+- `20260719120000_player_identity_foundation.sql` — `player_profiles`,
+  `player_wallets`, `wallet_signature_challenges` (hash-only, single-use),
+  `wallet_verification_events`, `player_security_events`, protection
+  triggers, RLS, and default-deny grants.
+- `20260719121000_player_access_foundation.sql` — immutable
+  `player_access_evaluations` (integer base-unit evidence) and short-lived
+  `player_access_sessions` with one-way invalidation.
+- `20260719122000_player_catalog.sql` — `players.access_history.view` and
+  `players.security_events.view` permissions plus conservative role
+  mappings. No player mutation permissions exist.
+- `20260719123000_player_functions.sql` — narrow security-definer functions:
+  challenge issue/verify/consume (service role), profile registration and
+  wallet replacement (service role), the canonical access-evaluation
+  recorder (service role), `get_player_me` (players), and
+  `get_player_directory` / `get_player_detail` (admins, permission-checked).
+
+Design rules carried from Phase 2A: every table has RLS; the service role
+has **no direct table grants** and works only through the narrow functions;
+challenge nonces and signed messages are stored as SHA-256 hashes only; the
+append-only histories are trigger-protected.
+
+### Owner: apply the Phase 2B migrations
+
+Same guarded workflow as Phase 2A:
+
+```bash
+npm run db:verify-target
+npm run db:migrations:list
+npm run db:migrations:dry-run
+SUPABASE_REMOTE_WRITES_APPROVED=true npm run db:migrations:push
+npm run db:lint:hosted
+RUN_HOSTED_SUPABASE_TESTS=true npm run db:test:hosted
+```
+
+`db:test:hosted` now runs two suites: the Phase 2A read-only smoke tests
+(anon key) and the Phase 2B player schema tests. The player suite connects
+with `SUPABASE_DATABASE_URL`, runs entirely inside one transaction, and
+always rolls back, so its disposable test users, profiles, wallets, and
+challenges never persist. It covers profile and wallet uniqueness,
+challenge single-use and expiration, replay denial, evaluation and session
+immutability, wallet-replacement invalidation, RLS self/cross/anonymous
+behavior, admin permission enforcement, and Read-only Analyst masking.
+Run the player suite alone with `db:test:players:hosted`.
+
+If the CLI's management API rejects the linked commands (403 login-role
+errors were observed with limited-privilege access tokens), re-run
+`npx supabase login` with an owner account first.
+
+### Owner: wallet environment
+
+Fill the Phase 2B values in `.env.local` (see `.env.example`):
+`NEXT_PUBLIC_REOWN_PROJECT_ID`, `NEXT_PUBLIC_SOLANA_NETWORK`,
+`SOLANA_RPC_URL`, `FABLE_TOKEN_MINT`, `FABLE_ACCESS_REQUIRED_TOKENS=10000`.
+Until the mint and RPC are configured, wallet connection still works and
+protected access fails safe with an honest "verification not available"
+state; no balance is ever fabricated.
+
+Player auth sessions use Supabase's own email-token exchange with synthetic
+`@players.fablesol.invalid` addresses (permanently undeliverable by
+construction). No additional auth provider needs to be enabled.

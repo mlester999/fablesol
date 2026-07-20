@@ -9,10 +9,14 @@ import { ADMIN_PERMISSION_KEYS, ADMIN_ROLE_KEYS, ADMIN_ROLE_NAMES } from './cata
  * system catalog migration. The database is authoritative; this fails loudly
  * if either side drifts.
  */
-const migrationSql = readFileSync(
-  path.resolve(__dirname, '../../../../../supabase/migrations/20260718131000_admin_authorization_catalog.sql'),
-  'utf8',
-);
+const migrationSql = [
+  '20260718131000_admin_authorization_catalog.sql',
+  '20260719122000_player_catalog.sql',
+]
+  .map((file) =>
+    readFileSync(path.resolve(__dirname, '../../../../../supabase/migrations/', file), 'utf8'),
+  )
+  .join('\n');
 
 describe('admin catalog contract', () => {
   it('matches the seven seeded system roles', () => {
@@ -40,9 +44,9 @@ describe('admin catalog contract', () => {
   });
 
   it('grants every mapped permission key that exists in the catalog', () => {
-    const mappedKeys = [
-      ...migrationSql.matchAll(/^\s+\('([a-z_]+)', '([a-z_.]+)'\),?$/gmu),
-    ].map((match) => ({ role: match[1], permission: match[2] }));
+    const mappedKeys = [...migrationSql.matchAll(/^\s+\('([a-z_]+)', '([a-z_.]+)'\),?$/gmu)].map(
+      (match) => ({ role: match[1], permission: match[2] }),
+    );
 
     expect(mappedKeys.length).toBeGreaterThan(30);
     for (const mapping of mappedKeys) {

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { LandingNav } from '@/components/landing/landing-nav';
 import { WorldHero } from '@/components/landing/world-hero';
+import { PlayNowButton } from '@/components/site/connect-button';
 import { GAME_DESCRIPTION, GAME_NAME, GAME_TAGLINE, SITE_URL } from '@/content/game/brand';
 import { PROJECT_STATUS } from '@/content/game/availability';
 
@@ -38,9 +39,7 @@ export default function LandingPage() {
             friends with your permanent cat companion, all in one welcoming pixel world.
           </p>
           <div className="landing__cta cta-row">
-            <Link className="btn btn-copper btn-large" href="/play">
-              Play Now
-            </Link>
+            <PlayNowButton />
             <Link className="btn btn-secondary btn-large" href="/how-to-play">
               How to Play
             </Link>

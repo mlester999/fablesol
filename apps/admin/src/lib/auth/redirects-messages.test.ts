@@ -19,7 +19,9 @@ describe('destinationForAuthorization', () => {
       }),
     ).toBe(ADMIN_ROUTES.dashboard);
     expect(destinationForAuthorization({ outcome: 'unauthenticated' })).toBe(ADMIN_ROUTES.login);
-    expect(destinationForAuthorization({ outcome: 'unauthorized' })).toBe(ADMIN_ROUTES.unauthorized);
+    expect(destinationForAuthorization({ outcome: 'unauthorized' })).toBe(
+      ADMIN_ROUTES.unauthorized,
+    );
     expect(destinationForAuthorization({ outcome: 'suspended' })).toBe(ADMIN_ROUTES.suspended);
   });
 });

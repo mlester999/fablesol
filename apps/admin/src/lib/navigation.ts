@@ -14,11 +14,26 @@ interface AdminModuleDefinition {
  */
 export const ADMIN_MODULES: readonly AdminModuleDefinition[] = [
   {
-    item: { href: '/dashboard', label: 'Dashboard', icon: 'dashboard', group: 'Operations', exact: true },
+    item: {
+      href: '/dashboard',
+      label: 'Dashboard',
+      icon: 'dashboard',
+      group: 'Operations',
+      exact: true,
+    },
     requiredPermission: 'dashboard.view',
   },
   {
-    item: { href: '/announcements', label: 'Announcements', icon: 'announcements', group: 'Operations' },
+    item: { href: '/players', label: 'Players', icon: 'players', group: 'Operations' },
+    requiredPermission: 'players.view',
+  },
+  {
+    item: {
+      href: '/announcements',
+      label: 'Announcements',
+      icon: 'announcements',
+      group: 'Operations',
+    },
     requiredPermission: 'announcements.view',
   },
   {
@@ -26,7 +41,12 @@ export const ADMIN_MODULES: readonly AdminModuleDefinition[] = [
     requiredPermission: 'maintenance.view',
   },
   {
-    item: { href: '/features', label: 'Feature availability', icon: 'features', group: 'Operations' },
+    item: {
+      href: '/features',
+      label: 'Feature availability',
+      icon: 'features',
+      group: 'Operations',
+    },
     requiredPermission: 'features.view',
   },
   {

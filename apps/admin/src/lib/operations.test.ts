@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { fromDatetimeLocal, toDatetimeLocal } from './datetime';
-import { announcementEffectiveStatus, featureOverridesSchema, gameSettingsSchema } from './operations';
+import {
+  announcementEffectiveStatus,
+  featureOverridesSchema,
+  gameSettingsSchema,
+} from './operations';
 
 describe('announcementEffectiveStatus', () => {
   const now = new Date('2026-07-18T12:00:00Z');
@@ -73,9 +77,7 @@ describe('game settings schema', () => {
       }).success,
     ).toBe(true);
 
-    expect(
-      gameSettingsSchema.safeParse({ gameName: 'F' }).success,
-    ).toBe(false);
+    expect(gameSettingsSchema.safeParse({ gameName: 'F' }).success).toBe(false);
   });
 });
 

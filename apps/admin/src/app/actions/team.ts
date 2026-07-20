@@ -105,7 +105,10 @@ export async function inviteAdminAction(
   return {
     status: 'created',
     email,
-    acceptanceUrl: new URL(invitationAcceptancePath(token), getAdminPublicEnv().adminUrl).toString(),
+    acceptanceUrl: new URL(
+      invitationAcceptancePath(token),
+      getAdminPublicEnv().adminUrl,
+    ).toString(),
     ...(expiresAt === undefined ? {} : { expiresAt }),
   };
 }
@@ -149,7 +152,10 @@ export async function resendInvitationAction(
   return {
     status: 'resent',
     ...(email === undefined ? {} : { email }),
-    acceptanceUrl: new URL(invitationAcceptancePath(token), getAdminPublicEnv().adminUrl).toString(),
+    acceptanceUrl: new URL(
+      invitationAcceptancePath(token),
+      getAdminPublicEnv().adminUrl,
+    ).toString(),
     ...(expiresAt === undefined ? {} : { expiresAt }),
   };
 }
@@ -202,7 +208,9 @@ export async function changeAdminRoleAction(formData: FormData): Promise<never> 
   });
 
   if (result.error) {
-    teamRedirect(result.error.message.includes('Super Admin') ? 'last-super-admin' : 'action-failed');
+    teamRedirect(
+      result.error.message.includes('Super Admin') ? 'last-super-admin' : 'action-failed',
+    );
   }
   teamRedirect('role-updated');
 }
@@ -223,7 +231,9 @@ export async function suspendAdminAction(formData: FormData): Promise<never> {
   });
 
   if (result.error) {
-    teamRedirect(result.error.message.includes('Super Admin') ? 'last-super-admin' : 'action-failed');
+    teamRedirect(
+      result.error.message.includes('Super Admin') ? 'last-super-admin' : 'action-failed',
+    );
   }
   teamRedirect('member-suspended');
 }

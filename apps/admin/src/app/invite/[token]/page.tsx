@@ -97,16 +97,12 @@ export default async function InvitePage({ params, searchParams }: InvitePagePro
           <SubmitButton pendingLabel="Accepting…">Accept invitation</SubmitButton>
         </form>
       ) : sessionEmail !== undefined ? (
-        <Notice tone="warning">
-          {NOTICE_MESSAGES['email-mismatch'] ?? ''}
-        </Notice>
+        <Notice tone="warning">{NOTICE_MESSAGES['email-mismatch'] ?? ''}</Notice>
       ) : (
         <form className="form-stack" action={acceptInvitationAction}>
           <input name="token" type="hidden" value={token} />
           <PasswordGeneratorField confirmationLabel="Confirm password" label="Choose a password" />
-          <SubmitButton pendingLabel="Creating account…">
-            Create account and accept
-          </SubmitButton>
+          <SubmitButton pendingLabel="Creating account…">Create account and accept</SubmitButton>
         </form>
       )}
 

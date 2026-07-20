@@ -2,8 +2,7 @@ export const MINIMUM_PASSWORD_LENGTH = 12;
 export const MAXIMUM_PASSWORD_LENGTH = 128;
 
 export type PasswordValidation =
-  | { readonly valid: true }
-  | { readonly valid: false; readonly reason: 'mismatch' | 'weak' };
+  { readonly valid: true } | { readonly valid: false; readonly reason: 'mismatch' | 'weak' };
 
 export function validateNewPassword(password: string, confirmation: string): PasswordValidation {
   if (password !== confirmation) {

@@ -24,7 +24,7 @@ describe('site header', () => {
     const docsLink = screen.getByRole('link', { name: 'Docs' });
     expect(docsLink.getAttribute('aria-current')).toBe('page');
     expect(screen.getByRole('button', { name: /Search/ })).toBeTruthy();
-    expect(screen.getAllByRole('button', { name: 'Connect' }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: 'Connect wallet' }).length).toBeGreaterThan(0);
   });
 
   it('shows the honest project status on inner pages too', () => {
@@ -129,15 +129,16 @@ describe('connect button', () => {
     dialog.close = () => {
       dialog.removeAttribute('open');
     };
-    await user.click(screen.getByRole('button', { name: 'Connect' }));
+    await user.click(screen.getByRole('button', { name: 'Connect wallet' }));
     const scope = within(dialog);
+    // Wallet configuration is absent in tests, so the dialog must show the
+    // honest unavailable state and never simulate a wallet.
+    expect(scope.getByText(/not available right now/i)).toBeTruthy();
     expect(scope.getByText(/No wallet is connected right now/)).toBeTruthy();
     expect(scope.getByText(/never ask for your seed phrase/i)).toBeTruthy();
-    // No fabricated address or connected claim anywhere.
+    // No fabricated address, balance, or connected claim anywhere.
     expect(dialog.textContent).not.toMatch(/0x[0-9a-fA-F]{6,}/);
     expect(dialog.textContent?.toLowerCase()).not.toContain('connected!');
-    // The planned status is honest.
-    expect(scope.getByText('Planned')).toBeTruthy();
   });
 });
 

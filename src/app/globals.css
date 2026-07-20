@@ -3094,6 +3094,14 @@ ol.docs-list {
 }
 
 .connect-dialog {
+  /* The global reset zeroes the user-agent margin that centers a native
+     dialog, so the centering is restated explicitly here. */
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
   border: 1px solid var(--fb-line-strong);
   border-radius: var(--fb-radius);
   padding: 0;
@@ -3652,5 +3660,155 @@ ol.docs-list {
   .dhome-card:hover,
   .dhome-entry:hover {
     transform: none;
+  }
+}
+
+/* ============================================================
+   Wallet flow, /play, and /account (Phase 2B)
+   ============================================================ */
+
+.wallet-flow {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.wallet-flow__note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--fb-muted);
+  line-height: 1.6;
+}
+
+.wallet-flow__panel {
+  display: grid;
+  gap: 0.8rem;
+  border-left: 4px solid transparent;
+  padding-left: 0.8rem;
+}
+
+/* Eligibility is stated in text; the border only reinforces it visually. */
+.wallet-flow__panel--eligible {
+  border-left-color: var(--fb-accent, #2e7d5b);
+}
+
+.wallet-flow__panel--blocked {
+  border-left-color: var(--fb-line-strong);
+}
+
+.wallet-flow__facts {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0.8rem;
+  border: 1px solid var(--fb-line);
+  border-radius: var(--fb-radius-small, 10px);
+  background: var(--fb-surface-soft, var(--fb-surface));
+}
+
+.wallet-flow__facts > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  justify-content: space-between;
+}
+
+.wallet-flow__facts dt {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fb-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.wallet-flow__facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.wallet-flow__facts code {
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.btn-inline {
+  padding: 0.1rem 0.5rem;
+  font-size: 0.82rem;
+}
+
+.account-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.account-grid .panel {
+  margin: 0;
+}
+
+.account-facts {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.account-facts > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px dashed var(--fb-line);
+  padding-bottom: 0.45rem;
+}
+
+.account-facts > div:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.account-facts dt {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fb-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.account-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+  max-width: 100%;
+}
+
+.play-status {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.play-status__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--fb-line-strong);
+  background: var(--fb-surface);
+  font-weight: 700;
+  font-size: 0.9rem;
+  width: fit-content;
+}
+
+@media (max-width: 480px) {
+  .wallet-flow__facts > div,
+  .account-facts > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wallet-flow__facts dd,
+  .account-facts dd {
+    text-align: left;
   }
 }

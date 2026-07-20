@@ -15,14 +15,7 @@ export function AdminBrand({ compact = false, markOnly = false, href }: AdminBra
 
   const content: ReactNode = (
     <>
-      <Image
-        alt=""
-        className="brand-logo"
-        height={40}
-        priority
-        src="/logo-no-bg.png"
-        width={40}
-      />
+      <Image alt="" className="brand-logo" height={40} priority src="/logo-no-bg.png" width={40} />
       <span className="brand-copy">
         <strong>Fablesol</strong>
         <span>Administration</span>

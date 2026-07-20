@@ -42,6 +42,8 @@ export const ADMIN_PERMISSION_KEYS = [
   'admins.manage_roles',
   'players.view',
   'players.support_view',
+  'players.access_history.view',
+  'players.security_events.view',
   'announcements.view',
   'announcements.create',
   'announcements.update',

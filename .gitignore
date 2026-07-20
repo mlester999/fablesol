@@ -44,3 +44,6 @@ yarn-error.log*
 .next/
 node_modules/
 .turbo/
+
+# Supabase CLI local state
+supabase/.temp/

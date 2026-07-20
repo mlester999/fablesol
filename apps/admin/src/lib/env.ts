@@ -59,7 +59,10 @@ export function isAdminSupabaseConfigured(): boolean {
 }
 
 /** Returns the Supabase URL and anon key or throws a clear, non-secret error. */
-export function requireAdminEnv(): { readonly supabaseUrl: string; readonly supabaseAnonKey: string } {
+export function requireAdminEnv(): {
+  readonly supabaseUrl: string;
+  readonly supabaseAnonKey: string;
+} {
   const { supabaseUrl, supabaseAnonKey } = getAdminPublicEnv();
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error(

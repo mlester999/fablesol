@@ -20,9 +20,7 @@ describe('InvitationLinkPanel', () => {
   it('renders nothing until a link exists', () => {
     const { container } = render(<InvitationLinkPanel state={{ status: 'idle' }} />);
     expect(container).toBeEmptyDOMElement();
-    const failed = render(
-      <InvitationLinkPanel state={{ status: 'error', message: 'nope' }} />,
-    );
+    const failed = render(<InvitationLinkPanel state={{ status: 'error', message: 'nope' }} />);
     expect(failed.container).toBeEmptyDOMElement();
   });
 

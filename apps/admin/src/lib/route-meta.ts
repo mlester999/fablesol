@@ -27,6 +27,25 @@ export const ADMIN_ROUTE_METADATA: readonly {
     },
   },
   {
+    path: '/players',
+    exact: true,
+    meta: {
+      title: 'Players',
+      description: 'Player directory: profiles, wallet links, and $FABLE access state.',
+      breadcrumbGroup: 'Operations',
+    },
+  },
+  {
+    path: '/players',
+    meta: {
+      title: 'Player detail',
+      description: 'Profile facts, wallet history, access history, and security events.',
+      breadcrumbGroup: 'Operations',
+      breadcrumbParent: 'Players',
+      parentHref: '/players',
+    },
+  },
+  {
     path: '/announcements',
     meta: {
       title: 'Announcements',

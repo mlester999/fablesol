@@ -27,8 +27,7 @@
   --fb-focus: #2f5d46;
   --fb-danger: #8b3a2a;
   --fb-success: #2f6b45;
-  --fb-font-sans:
-    'Segoe UI', 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --fb-font-sans: 'Segoe UI', 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --fb-font-display:
     'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
   --portal-sidebar-width: 16.5rem;
@@ -119,7 +118,10 @@ code {
   font-weight: 650;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease;
 }
 
 .button--primary {
@@ -341,7 +343,11 @@ fieldset.field {
 
 .auth-context {
   background:
-    radial-gradient(120% 90% at 20% 10%, color-mix(in srgb, var(--fb-leaf) 30%, transparent), transparent),
+    radial-gradient(
+      120% 90% at 20% 10%,
+      color-mix(in srgb, var(--fb-leaf) 30%, transparent),
+      transparent
+    ),
     linear-gradient(160deg, var(--fb-moss-deep), var(--fb-forest));
   color: var(--fb-parchment);
   padding: clamp(1.5rem, 4vw, 3rem);

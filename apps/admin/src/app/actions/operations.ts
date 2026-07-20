@@ -183,7 +183,9 @@ export async function saveFeatureAvailabilityDraftAction(formData: FormData): Pr
     moduleRedirect('features', 'reason-required');
   }
 
-  const keys = formData.getAll('featureKey').filter((key): key is string => typeof key === 'string');
+  const keys = formData
+    .getAll('featureKey')
+    .filter((key): key is string => typeof key === 'string');
   const overrides: Record<string, { status: string; note?: string }> = {};
 
   for (const key of keys) {
@@ -206,7 +208,9 @@ export async function saveFeatureAvailabilityDraftAction(formData: FormData): Pr
   if (result.error) {
     moduleRedirect(
       'features',
-      result.error.message.includes('INVALID_FEATURE_OVERRIDES') ? 'invalid-overrides' : 'save-failed',
+      result.error.message.includes('INVALID_FEATURE_OVERRIDES')
+        ? 'invalid-overrides'
+        : 'save-failed',
     );
   }
   moduleRedirect('features', 'saved');

@@ -1,7 +1,4 @@
-import {
-  publishMaintenanceAction,
-  saveMaintenanceDraftAction,
-} from '@/app/actions/operations';
+import { publishMaintenanceAction, saveMaintenanceDraftAction } from '@/app/actions/operations';
 import { ConfirmedSubmitButton } from '@/components/confirmed-submit-button';
 import { Notice } from '@/components/notice';
 import { SubmitButton } from '@/components/submit-button';
@@ -83,7 +80,9 @@ export default async function MaintenancePage({ searchParams }: MaintenancePageP
 
       {canManage ? (
         <section className="card" aria-labelledby="maintenance-draft">
-          <h2 id="maintenance-draft">{draft === undefined ? 'New draft' : `Draft v${draft.version_number}`}</h2>
+          <h2 id="maintenance-draft">
+            {draft === undefined ? 'New draft' : `Draft v${draft.version_number}`}
+          </h2>
           <p className="card__note">
             Saving updates the single working draft; publishing supersedes the current published
             version. Nothing here affects players until published.

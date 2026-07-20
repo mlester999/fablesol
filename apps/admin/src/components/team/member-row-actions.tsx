@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  changeAdminRoleAction,
-  restoreAdminAction,
-  suspendAdminAction,
-} from '@/app/actions/team';
+import { changeAdminRoleAction, restoreAdminAction, suspendAdminAction } from '@/app/actions/team';
 import { ConfirmedSubmitButton } from '@/components/confirmed-submit-button';
 import { ADMIN_ROLE_KEYS, ADMIN_ROLE_NAMES, type AdminRoleKey } from '@/lib/auth/catalog';
 

@@ -4,7 +4,9 @@ import { ADMIN_PERMISSION_KEYS } from './auth/catalog';
 import type { AdminAuthorizationContext } from './auth/types';
 import { ADMIN_MODULES, resolveAdminNavigation } from './navigation';
 
-function contextWith(permissionKeys: AdminAuthorizationContext['permissionKeys']): AdminAuthorizationContext {
+function contextWith(
+  permissionKeys: AdminAuthorizationContext['permissionKeys'],
+): AdminAuthorizationContext {
   return {
     userId: '00000000-0000-4000-8000-000000000000',
     fullName: 'Test Admin',

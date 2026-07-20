@@ -1,7 +1,4 @@
-import {
-  publishGameSettingsAction,
-  saveGameSettingsDraftAction,
-} from '@/app/actions/operations';
+import { publishGameSettingsAction, saveGameSettingsDraftAction } from '@/app/actions/operations';
 import { ConfirmedSubmitButton } from '@/components/confirmed-submit-button';
 import { Notice } from '@/components/notice';
 import { SubmitButton } from '@/components/submit-button';

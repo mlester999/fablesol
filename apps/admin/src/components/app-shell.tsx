@@ -17,6 +17,7 @@ import {
 
 const iconGlyphs: Readonly<Record<string, string>> = {
   dashboard: '⌂',
+  players: '♟',
   announcements: '◉',
   maintenance: '⚑',
   features: '▤',
@@ -168,7 +169,9 @@ export function AdminAppShell({
           {glyph}
         </span>
         <span className="portal-sidebar__label">{item.label}</span>
-        {item.badgeLabel ? <small className="portal-sidebar__badge">{item.badgeLabel}</small> : null}
+        {item.badgeLabel ? (
+          <small className="portal-sidebar__badge">{item.badgeLabel}</small>
+        ) : null}
       </Link>
     );
   }
@@ -181,7 +184,11 @@ export function AdminAppShell({
       return (
         <div className="portal-sidebar__group" key={`${idPrefix}-${group.label}`}>
           {compact ? (
-            <div aria-hidden="true" className="portal-sidebar__group-separator" title={group.label} />
+            <div
+              aria-hidden="true"
+              className="portal-sidebar__group-separator"
+              title={group.label}
+            />
           ) : (
             <h2 className="portal-sidebar__group-label" id={headingId}>
               {group.label}
@@ -236,7 +243,10 @@ export function AdminAppShell({
         </nav>
 
         <div className="portal-sidebar__footer">
-          <div className={`portal-sidebar__profile${profileOpen ? ' is-open' : ''}`} ref={profileRef}>
+          <div
+            className={`portal-sidebar__profile${profileOpen ? ' is-open' : ''}`}
+            ref={profileRef}
+          >
             <button
               aria-expanded={profileOpen}
               aria-haspopup="menu"
@@ -249,14 +259,21 @@ export function AdminAppShell({
               <span aria-hidden="true">{initialsFor(displayName)}</span>
             </button>
             <div className="portal-sidebar__profile-expanded">
-              <span aria-hidden="true" className="portal-sidebar__avatar portal-sidebar__avatar--static">
+              <span
+                aria-hidden="true"
+                className="portal-sidebar__avatar portal-sidebar__avatar--static"
+              >
                 {initialsFor(displayName)}
               </span>
               {profileExpanded}
               <div className="portal-sidebar__profile-actions">{signOut}</div>
             </div>
             {profileOpen ? (
-              <div className="portal-sidebar__profile-menu" role="menu" aria-label="Administrator account">
+              <div
+                className="portal-sidebar__profile-menu"
+                role="menu"
+                aria-label="Administrator account"
+              >
                 <div className="portal-sidebar__profile-menu-meta">
                   <strong>{displayName}</strong>
                   <span>{roleName}</span>
@@ -311,7 +328,10 @@ export function AdminAppShell({
           </div>
           <div className="portal-header__end">
             {environmentLabel ? (
-              <span className="portal-env-badge" title={`Application environment: ${environmentLabel}`}>
+              <span
+                className="portal-env-badge"
+                title={`Application environment: ${environmentLabel}`}
+              >
                 {environmentLabel}
               </span>
             ) : null}
@@ -360,7 +380,10 @@ export function AdminAppShell({
             </nav>
             <div className="portal-nav-drawer__profile">
               <div className="portal-sidebar__profile-expanded">
-                <span aria-hidden="true" className="portal-sidebar__avatar portal-sidebar__avatar--static">
+                <span
+                  aria-hidden="true"
+                  className="portal-sidebar__avatar portal-sidebar__avatar--static"
+                >
                   {initialsFor(displayName)}
                 </span>
                 {profileExpanded}

@@ -93,7 +93,9 @@ async function main() {
   );
 
   const failed = results.filter((result) => !result.passed).length;
-  process.stdout.write(`1..${results.length}\n# ${results.length - failed} passed, ${failed} failed\n`);
+  process.stdout.write(
+    `1..${results.length}\n# ${results.length - failed} passed, ${failed} failed\n`,
+  );
   if (failed > 0) process.exitCode = 1;
 }
 

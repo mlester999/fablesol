@@ -12,6 +12,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      // Tests run in Node, where the real 'server-only' marker throws.
+      'server-only': path.resolve(__dirname, './src/test/server-only-stub.ts'),
       '@': path.resolve(__dirname, './src'),
     },
   },

@@ -13,7 +13,11 @@ export interface AdminNavigationGroup {
 }
 
 /** Preferred group order for the sidebar. Unknown groups follow by first appearance. */
-export const ADMIN_NAVIGATION_GROUP_ORDER = ['Operations', 'Configuration', 'Administration'] as const;
+export const ADMIN_NAVIGATION_GROUP_ORDER = [
+  'Operations',
+  'Configuration',
+  'Administration',
+] as const;
 
 export const ADMIN_SIDEBAR_COLLAPSE_STORAGE_KEY = 'fablesol.admin.sidebar.collapsed';
 

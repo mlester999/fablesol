@@ -67,14 +67,14 @@ export const FEATURE_AVAILABILITY = [
   {
     id: 'wallet-connect',
     name: 'Wallet connection',
-    status: 'planned',
-    note: 'Arrives with the next game update.',
+    status: 'beta',
+    note: 'Newly opened. Requires a compatible Solana wallet.',
   },
   {
     id: 'access-check',
     name: '$FABLE access requirement check',
-    status: 'planned',
-    note: 'Arrives together with wallet connection.',
+    status: 'beta',
+    note: 'Newly opened. Verification can be briefly unavailable while service setup completes.',
   },
   {
     id: 'game-world',

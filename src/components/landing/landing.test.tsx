@@ -17,7 +17,7 @@ describe('landing navigation', () => {
     expect(screen.getByText('Fablesol')).toBeTruthy();
     expect(screen.getByRole('link', { name: 'How to Play' })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Docs' })).toBeTruthy();
-    expect(screen.getAllByRole('button', { name: 'Connect' }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: 'Connect wallet' }).length).toBeGreaterThan(0);
     // Honest project status — no invented "beta" badge.
     expect(screen.getByText('In development')).toBeTruthy();
   });
@@ -37,10 +37,13 @@ describe('world scene fallback', () => {
 });
 
 describe('play availability page', () => {
-  it('is honest that the world is not playable yet', () => {
-    render(<PlayPage />);
-    expect(screen.getByText(/The world is being built/)).toBeTruthy();
-    expect(screen.getByText(/no playable build/i)).toBeTruthy();
-    expect(screen.getAllByText('Planned').length).toBeGreaterThan(0);
+  it('is honest that the world is not playable yet', async () => {
+    // Without Supabase configuration the page must stay public-safe and
+    // honest: a verify prompt, no fake session, no fake world.
+    render(await PlayPage());
+    expect(screen.getByText(/Verify your access/)).toBeTruthy();
+    expect(screen.getByText(/still in development/i)).toBeTruthy();
+    expect(screen.getAllByText(/10,000 \$FABLE/).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/players online/i)).toBeNull();
   });
 });

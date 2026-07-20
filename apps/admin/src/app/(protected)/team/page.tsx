@@ -10,7 +10,9 @@ import { loadAdminInvitations, loadAdminMembers } from '@/lib/team';
 export const metadata = { title: 'Team' };
 export const dynamic = 'force-dynamic';
 
-const NOTICE_MESSAGES: Readonly<Record<string, { readonly tone: 'success' | 'warning'; readonly text: string }>> = {
+const NOTICE_MESSAGES: Readonly<
+  Record<string, { readonly tone: 'success' | 'warning'; readonly text: string }>
+> = {
   'invitation-revoked': { tone: 'success', text: 'The invitation was revoked.' },
   'role-updated': { tone: 'success', text: 'The role was updated.' },
   'member-suspended': { tone: 'success', text: 'The administrator was suspended.' },
@@ -36,10 +38,7 @@ export default async function TeamPage({ searchParams }: TeamPageProps) {
   const context = await requireAuthorizedAdmin('admins.view');
   const notice = NOTICE_MESSAGES[(await searchParams).notice ?? ''];
 
-  const [members, invitations] = await Promise.all([
-    loadAdminMembers(),
-    loadAdminInvitations(),
-  ]);
+  const [members, invitations] = await Promise.all([loadAdminMembers(), loadAdminInvitations()]);
 
   const canInvite = hasAdminPermission(context, 'admins.invite');
   const canManageRoles = hasAdminPermission(context, 'admins.manage_roles');

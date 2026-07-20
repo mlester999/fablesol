@@ -32,10 +32,7 @@ export default async function ResetPasswordPage({ searchParams }: ResetPasswordP
       {notice ? <Notice tone="warning">{notice}</Notice> : null}
 
       <form className="form-stack" action={resetPasswordAction}>
-        <PasswordGeneratorField
-          confirmationLabel="Confirm new password"
-          label="New password"
-        />
+        <PasswordGeneratorField confirmationLabel="Confirm new password" label="New password" />
         <SubmitButton pendingLabel="Updating…">Update password</SubmitButton>
       </form>
     </AuthFrame>

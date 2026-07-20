@@ -800,6 +800,28 @@ export const walletAccessPage = definePage({
           'On-chain token ownership in your wallet',
         ]),
         interactive('access-flow'),
+      ],
+    ),
+    section(
+      'verification',
+      'How wallet verification works',
+      [
+        'Select Connect wallet, choose a compatible Solana wallet, and approve the connection. Fablesol then asks the wallet to sign a short verification message that proves the wallet is yours.',
+        'Signing is free. It never sends a transaction, never moves tokens, and never gives Fablesol control of your funds.',
+        'Your $FABLE balance is checked when you enter protected player areas, and the confirmation lasts a short time before it is checked again. If the wallet later drops below 10,000 $FABLE, the next renewal will not succeed until the requirement is met again.',
+        'The playable world is still in development. Verifying early prepares your player account for opening day, and these guides stay open to everyone without a wallet or any tokens.',
+      ],
+      [
+        steps(ACCESS.accessSteps.map((s) => ({ title: s.title, text: s.text }))),
+        callout('rule', 'The requirement', 'Hold at least 10,000 $FABLE in your connected wallet.'),
+      ],
+    ),
+    section(
+      'safety',
+      'Wallet safety promises',
+      ['A few simple rules keep every verification safe.'],
+      [
+        list([...ACCESS.securityPromises]),
         callout(
           'safety',
           'Seed phrases',
